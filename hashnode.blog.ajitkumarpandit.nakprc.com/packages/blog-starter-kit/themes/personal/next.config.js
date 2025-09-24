@@ -25,7 +25,14 @@ const config = {
 				protocol: 'https',
 				hostname: 'cdn.hashnode.com',
 			},
+			{
+				protocol: 'https',
+				hostname: '**',
+			},
 		],
+		// Uncomment the line below if having image optimization issues on production
+		// unoptimized: process.env.NODE_ENV === 'production',
+		formats: ['image/webp', 'image/avif'],
 	},
 	async rewrites() {
 		return [

@@ -1,9 +1,10 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import Image from 'next/image';
 import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ThemeToggle } from './theme-toggle';
+import { Logo } from './logo';
+import { SITE_CONFIG } from '../lib/constants';
 
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
@@ -24,19 +25,10 @@ export const TopNav = () => {
 					{/* Logo and Brand */}
 					<div className="flex items-center gap-3">
 						<Link href="/" className="group flex items-center gap-3">
-							<div className="relative">
-								<Image
-									src="/AJITKUMARPANDIT_LOGO.png"
-									alt="Ajit Kumar Pandit Logo"
-									width={100}
-									height={50}
-									className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
-								/>
-							</div>
-							<div className=" sm:block">
+							<Logo priority={true} />
+							<div className="hidden sm:block">
 								<h1 className="group-hover:text-primary-600 dark:group-hover:text-primary-400 text-xl font-bold text-gray-900 transition-colors duration-300 dark:text-white">
-									{/* {publication.title} */}
-									BLOG
+									{SITE_CONFIG.TITLE}
 								</h1>
 							</div>
 						</Link>
