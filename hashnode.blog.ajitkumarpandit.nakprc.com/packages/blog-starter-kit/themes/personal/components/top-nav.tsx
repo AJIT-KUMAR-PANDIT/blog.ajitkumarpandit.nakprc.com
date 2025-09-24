@@ -134,7 +134,7 @@ export const TopNav = () => {
 					</div>
 
 					{/* Navigation Links */}
-					<div className="hidden items-center space-x-8 md:flex">
+					<div className="hidden items-center space-x-8 lg:flex">
 						<Link
 							href="/"
 							className="hover:text-primary-600 dark:hover:text-primary-400 text-sm font-medium text-gray-700 transition-colors duration-300 dark:text-gray-300"
@@ -277,7 +277,7 @@ export const TopNav = () => {
 					{/* Header */}
 					<div className="flex items-center justify-between border-b border-gray-200 p-4 dark:border-neutral-700">
 						<div className="flex items-center gap-3">
-							<Logo priority={false} />
+							<Logo priority={true} />
 							<h2 className="text-lg font-bold text-gray-900 dark:text-white">
 								{SITE_CONFIG.TITLE}
 							</h2>

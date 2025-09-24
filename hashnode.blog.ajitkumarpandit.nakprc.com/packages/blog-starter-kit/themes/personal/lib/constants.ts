@@ -1,7 +1,7 @@
 // Asset paths and constants
 export const ASSETS = {
 	// Logo path - using consistent naming to avoid case sensitivity issues
-	LOGO: '/ajitkumarpanditlogo.png',
+	LOGO: 'https://ajitkumarpandit.nakprc.com/ajitkumarpandit/AJITKUMARPANDIT_LOGO.png',
 	LOGO_ALT: 'Ajit Kumar Pandit Logo',
 } as const;
 
