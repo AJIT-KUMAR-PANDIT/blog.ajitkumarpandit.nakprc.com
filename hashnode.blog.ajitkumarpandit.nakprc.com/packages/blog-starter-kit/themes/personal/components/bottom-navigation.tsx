@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import { useAppContext } from './contexts/appContext';
+import { ThemeToggle } from './theme-toggle';
 
 interface NavItem {
   name: string;
@@ -55,43 +55,10 @@ const AboutIcon = ({ active }: { active: boolean }) => (
   </svg>
 );
 
-const ThemeIcon = ({ active }: { active: boolean }) => (
-  <svg 
-    className={`w-6 h-6 transition-all duration-300 ${active ? 'text-primary-500' : 'text-gray-500'}`} 
-    fill={active ? 'currentColor' : 'none'} 
-    stroke="currentColor" 
-    viewBox="0 0 24 24"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-  </svg>
-);
 
 export const BottomNavigation = () => {
   const router = useRouter();
   const { publication } = useAppContext();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  // Handle theme toggle
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    document.documentElement.classList.toggle('dark', newTheme);
-    localStorage.setItem('theme', newTheme ? 'dark' : 'light');
-  };
-
-  // Initialize theme
-  useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-    
-    setIsDarkMode(shouldBeDark);
-    document.documentElement.classList.toggle('dark', shouldBeDark);
-  }, []);
-
-  if (!mounted) return null;
 
   const navItems: NavItem[] = [
     {
@@ -152,18 +119,7 @@ export const BottomNavigation = () => {
           })}
           
           {/* Theme Toggle Button */}
-          <button
-            onClick={toggleTheme}
-            className="flex flex-col items-center justify-center p-2 min-w-[64px] group"
-            aria-label="Toggle theme"
-          >
-            <div className="transition-all duration-300 transform group-hover:scale-105 group-active:scale-95">
-              <ThemeIcon active={false} />
-            </div>
-            <span className="text-xs mt-1 font-medium text-gray-500 dark:text-gray-400">
-              Theme
-            </span>
-          </button>
+          <ThemeToggle className="p-2 min-w-[64px]" showLabel={true} size="md" />
         </div>
       </div>
       

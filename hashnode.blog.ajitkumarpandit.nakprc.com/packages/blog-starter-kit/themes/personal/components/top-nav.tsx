@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PublicationNavbarItem } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
+import { ThemeToggle } from './theme-toggle';
 
 function hasUrl(
 	navbarItem: PublicationNavbarItem,
@@ -32,7 +33,7 @@ export const TopNav = () => {
 									className="h-10 w-auto transition-transform duration-300 group-hover:scale-105"
 								/>
 							</div>
-							<div className="hidden sm:block">
+							<div className=" sm:block">
 								<h1 className="group-hover:text-primary-600 dark:group-hover:text-primary-400 text-xl font-bold text-gray-900 transition-colors duration-300 dark:text-white">
 									{/* {publication.title} */}
 									BLOG
@@ -71,6 +72,15 @@ export const TopNav = () => {
 
 					{/* Right Side Actions */}
 					<div className="flex items-center gap-4">
+						{/* Theme Toggle - Desktop Only */}
+						<div className="hidden md:flex">
+							<ThemeToggle
+								className="rounded-lg p-2 transition-colors duration-300 hover:bg-gray-100 dark:hover:bg-neutral-800"
+								showLabel={false}
+								size="sm"
+							/>
+						</div>
+
 						{/* External Links */}
 						<div className="hidden items-center space-x-4 lg:flex">
 							{visibleItems.map((item) => (
