@@ -46,17 +46,22 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 	const highlightJsMonokaiTheme =
 		'.hljs{display:block;overflow-x:auto;padding:.5em;background:#23241f}.hljs,.hljs-subst,.hljs-tag{color:#f8f8f2}.hljs-emphasis,.hljs-strong{color:#a8a8a2}.hljs-bullet,.hljs-link,.hljs-literal,.hljs-number,.hljs-quote,.hljs-regexp{color:#ae81ff}.hljs-code,.hljs-section,.hljs-selector-class,.hljs-title{color:#a6e22e}.hljs-strong{font-weight:700}.hljs-emphasis{font-style:italic}.hljs-attr,.hljs-keyword,.hljs-name,.hljs-selector-tag{color:#f92672}.hljs-attribute,.hljs-symbol{color:#66d9ef}.hljs-class .hljs-title,.hljs-params{color:#f8f8f2}.hljs-addition,.hljs-built_in,.hljs-builtin-name,.hljs-selector-attr,.hljs-selector-id,.hljs-selector-pseudo,.hljs-string,.hljs-template-variable,.hljs-type,.hljs-variable{color:#e6db74}.hljs-comment,.hljs-deletion,.hljs-meta{color:#75715e}';
 
-			const tagsList = (post.tags ?? []).map((tag) => (
-				<li key={tag.id}>
-					<Link
-						href={`/tag/${tag.slug}`}
-						className="inline-flex items-center rounded-full border border-gray-300 dark:border-neutral-600 px-3 py-1 text-xs sm:text-sm font-medium text-gray-600 dark:text-neutral-300 hover:bg-primary-50 hover:border-primary-300 dark:hover:bg-primary-900/20 dark:hover:border-primary-600 transition-colors duration-200 whitespace-nowrap max-w-[200px] overflow-hidden text-ellipsis"
-						title={`#${tag.slug}`}
-					>
-						#{tag.slug}
-					</Link>
-				</li>
-			));
+			const tagsList = (post.tags ?? []).map((tag) => {
+				// Truncate tag names longer than 15 characters
+				const displayTag = tag.slug.length > 15 ? `${tag.slug.substring(0, 15)}...` : tag.slug;
+				
+				return (
+					<li key={tag.id} className="flex-shrink-0">
+						<Link
+							href={`/tag/${tag.slug}`}
+							className="inline-flex items-center rounded-full bg-gray-100 dark:bg-neutral-800 hover:bg-primary-100 dark:hover:bg-primary-900/30 border border-gray-200 dark:border-neutral-700 hover:border-primary-200 dark:hover:border-primary-600 px-2 py-0.5 text-xs font-medium text-gray-700 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-200 max-w-[120px] truncate"
+							title={`#${tag.slug}`}
+						>
+							<span className="truncate">#{displayTag}</span>
+						</Link>
+					</li>
+				);
+			});
 
 	const coverImageSrc = !!post.coverImage?.url
 		? resizeImage(post.coverImage.url, {
@@ -141,11 +146,11 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 			</div>
 			{/* Tags Section */}
 			{(post.tags ?? []).length > 0 && (
-				<div className="w-full border-t border-gray-200 dark:border-neutral-700 pt-6">
-					<div className="flex flex-col gap-3">
-						<span className="text-sm font-medium text-gray-500 dark:text-neutral-400">Tagged in</span>
+				<div className="w-full border-t border-gray-200 dark:border-neutral-700 pt-4">
+					<div className="flex flex-col gap-2">
+						<span className="text-xs font-medium text-gray-500 dark:text-neutral-400 uppercase tracking-wide">Topics</span>
 						<div className="-mx-1 sm:mx-0">
-							<ul className="flex items-center gap-2 max-w-full flex-wrap sm:flex-nowrap overflow-x-auto sm:overflow-x-auto px-1 sm:px-0">
+							<ul className="flex items-center gap-1.5 max-w-full overflow-x-auto px-1 sm:px-0 pb-1 scrollbar-hide">
 								{tagsList}
 							</ul>
 						</div>

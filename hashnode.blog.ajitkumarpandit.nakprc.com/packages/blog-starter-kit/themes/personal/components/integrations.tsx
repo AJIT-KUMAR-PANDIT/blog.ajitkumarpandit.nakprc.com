@@ -60,15 +60,36 @@ export function Integrations() {
   `;
 
 	useEffect(() => {
-		// @ts-ignore
-		window.gtag('config', gaTrackingID, {
-			transport_url: 'https://ping.hashnode.com',
-			first_party_collection: true,
-		});
-	}, []);
+		// Only configure gtag if it exists and gaTrackingID is available
+		if (typeof window !== 'undefined' && gaTrackingID && (window as any).gtag) {
+			try {
+				// @ts-ignore
+				window.gtag('config', gaTrackingID, {
+					transport_url: 'https://ping.hashnode.com',
+					first_party_collection: true,
+				});
+			} catch (error) {
+				console.warn('Google Analytics configuration failed:', error);
+			}
+		}
+	}, [gaTrackingID]);
 
 	return (
 		<>
+			{gaTrackingID && (
+				<>
+					<script async src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingID}`}></script>
+					<script
+						dangerouslySetInnerHTML={{
+							__html: `
+								window.dataLayer = window.dataLayer || [];
+								function gtag(){dataLayer.push(arguments);}
+								gtag('js', new Date());
+							`,
+						}}
+					></script>
+				</>
+			)}
 			{fbPixelID ? (
 				<script type="text/javascript" dangerouslySetInnerHTML={{ __html: fbPixel }}></script>
 			) : null}

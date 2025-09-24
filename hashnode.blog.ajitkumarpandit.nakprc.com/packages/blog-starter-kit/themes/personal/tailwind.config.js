@@ -100,6 +100,16 @@ module.exports = {
 					'-webkit-box-orient': 'vertical',
 					'-webkit-line-clamp': '3',
 				},
+				'.scrollbar-hide': {
+					/* IE and Edge */
+					'-ms-overflow-style': 'none',
+					/* Firefox */
+					'scrollbar-width': 'none',
+					/* Safari and Chrome */
+					'&::-webkit-scrollbar': {
+						'display': 'none'
+					}
+				},
 			}
 			addUtilities(newUtilities)
 		}
