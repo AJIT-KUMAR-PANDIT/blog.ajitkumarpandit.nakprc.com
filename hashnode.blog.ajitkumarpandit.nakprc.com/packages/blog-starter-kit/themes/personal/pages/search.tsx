@@ -572,36 +572,101 @@ export default function Search({ publication, posts }: Props) {
                 </div>
               )}
               
-              {/* Popular Topics */}
+              {/* Popular Topics - Bento Grid */}
               <div className="space-y-4">
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
                   Popular Topics
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full overflow-hidden">
-                  {/* Extract unique tags from posts */}
-                  {Array.from(
+                {(() => {
+                  const uniqueTags = Array.from(
                     new Set(
                       posts
                         .flatMap((post) => post.tags || [])
                         .map((tag) => tag.name)
                     )
-                  )
-                    .slice(0, 9)
-                    .map((tagName, index) => (
-                      <button
-                        key={tagName}
-                        onClick={() => handleSearchSubmit(tagName)}
-                        className="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all duration-200 text-left group min-h-[48px] w-full overflow-hidden"
-                      >
-                        <div className="flex items-center space-x-2 sm:space-x-3 w-full min-w-0">
-                          <div className="w-2 h-2 bg-primary-500 rounded-full group-hover:scale-125 transition-transform duration-200 flex-shrink-0" />
-                          <span className="text-sm sm:text-base font-medium text-gray-900 dark:text-white truncate min-w-0 break-words" title={tagName}>
-                            {tagName.length > 25 ? `${tagName.substring(0, 25)}...` : tagName}
-                          </span>
-                        </div>
-                      </button>
-                    ))}
-                </div>
+                  ).slice(0, 12);
+
+                  const bentoSizes = [
+                    'col-span-2 row-span-2', // Large square
+                    'col-span-1 row-span-1', // Small
+                    'col-span-1 row-span-1', // Small
+                    'col-span-2 row-span-1', // Large horizontal
+                    'col-span-1 row-span-2', // Tall vertical
+                    'col-span-1 row-span-1', // Small
+                    'col-span-1 row-span-1', // Small
+                    'col-span-2 row-span-1', // Large horizontal
+                    'col-span-1 row-span-2', // Tall vertical
+                    'col-span-1 row-span-1', // Small
+                    'col-span-1 row-span-1', // Small
+                    'col-span-2 row-span-1', // Large horizontal
+                  ];
+
+                  const colors = [
+                    'from-blue-50 to-blue-100 dark:from-blue-900/10 dark:to-blue-800/10 border-blue-200 dark:border-blue-800/30',
+                    'from-purple-50 to-purple-100 dark:from-purple-900/10 dark:to-purple-800/10 border-purple-200 dark:border-purple-800/30',
+                    'from-green-50 to-green-100 dark:from-green-900/10 dark:to-green-800/10 border-green-200 dark:border-green-800/30',
+                    'from-yellow-50 to-yellow-100 dark:from-yellow-900/10 dark:to-yellow-800/10 border-yellow-200 dark:border-yellow-800/30',
+                    'from-pink-50 to-pink-100 dark:from-pink-900/10 dark:to-pink-800/10 border-pink-200 dark:border-pink-800/30',
+                    'from-indigo-50 to-indigo-100 dark:from-indigo-900/10 dark:to-indigo-800/10 border-indigo-200 dark:border-indigo-800/30',
+                    'from-red-50 to-red-100 dark:from-red-900/10 dark:to-red-800/10 border-red-200 dark:border-red-800/30',
+                    'from-teal-50 to-teal-100 dark:from-teal-900/10 dark:to-teal-800/10 border-teal-200 dark:border-teal-800/30',
+                    'from-orange-50 to-orange-100 dark:from-orange-900/10 dark:to-orange-800/10 border-orange-200 dark:border-orange-800/30',
+                    'from-cyan-50 to-cyan-100 dark:from-cyan-900/10 dark:to-cyan-800/10 border-cyan-200 dark:border-cyan-800/30',
+                    'from-violet-50 to-violet-100 dark:from-violet-900/10 dark:to-violet-800/10 border-violet-200 dark:border-violet-800/30',
+                    'from-emerald-50 to-emerald-100 dark:from-emerald-900/10 dark:to-emerald-800/10 border-emerald-200 dark:border-emerald-800/30',
+                  ];
+
+                  return (
+                    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 auto-rows-fr gap-3 sm:gap-4 w-full min-h-80 sm:min-h-96 overflow-hidden">
+                      {uniqueTags.map((tagName, index) => {
+                        const size = bentoSizes[index % bentoSizes.length];
+                        const colorScheme = colors[index % colors.length];
+                        const isLarge = size.includes('col-span-2') || size.includes('row-span-2');
+                        
+                        return (
+                          <button
+                            key={tagName}
+                            onClick={() => handleSearchSubmit(tagName)}
+                            className={`${size} bg-gradient-to-br ${colorScheme} rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-5 hover:scale-105 hover:shadow-lg transition-all duration-300 text-left group relative min-h-[60px] sm:min-h-[80px] lg:min-h-[100px]`}
+                            title={tagName}
+                          >
+                            {/* Decorative dots pattern */}
+                            <div className="absolute top-2 right-2 opacity-20">
+                              <div className="grid grid-cols-2 gap-1">
+                                <div className="w-1 h-1 bg-current rounded-full"></div>
+                                <div className="w-1 h-1 bg-current rounded-full"></div>
+                                <div className="w-1 h-1 bg-current rounded-full"></div>
+                                <div className="w-1 h-1 bg-current rounded-full"></div>
+                              </div>
+                            </div>
+                            
+                            {/* Content */}
+                            <div className="relative z-10 h-full flex flex-col justify-center p-1">
+                              {isLarge ? (
+                                <>
+                                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-current rounded-full mb-2 sm:mb-3 group-hover:scale-125 transition-transform duration-200 opacity-60" />
+                                  <h3 className="font-bold text-xs sm:text-sm lg:text-base text-gray-900 dark:text-white mb-1 sm:mb-2 leading-tight break-words hyphens-auto">
+                                    {tagName}
+                                  </h3>
+                                  <p className="text-xs text-gray-600 dark:text-gray-400 opacity-80">
+                                    {posts.filter(post => post.tags?.some(tag => tag.name === tagName)).length} articles
+                                  </p>
+                                </>
+                              ) : (
+                                <>
+                                  <div className="w-2 h-2 sm:w-3 sm:h-3 bg-current rounded-full mb-1 sm:mb-2 group-hover:scale-125 transition-transform duration-200 opacity-60" />
+                                  <h3 className="font-semibold text-xs sm:text-xs lg:text-sm text-gray-900 dark:text-white leading-tight break-words hyphens-auto text-center">
+                                    {tagName}
+                                  </h3>
+                                </>
+                              )}
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
               </div>
               
               {/* Search Tips */}
