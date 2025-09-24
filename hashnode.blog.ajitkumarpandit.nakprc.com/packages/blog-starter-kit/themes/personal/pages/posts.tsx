@@ -80,7 +80,7 @@ export default function Posts({ publication, posts }: Props) {
         </Head>
 
         <TopNav />
-        <Container className="mx-auto flex max-w-4xl flex-col items-stretch gap-8 px-5 py-10 pt-24">
+        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-10 pt-24 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
@@ -104,7 +104,7 @@ export default function Posts({ publication, posts }: Props) {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value as SortOption)}
-                    className="w-full sm:w-auto min-w-[140px] px-3 py-2.5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
+                    className="w-full sm:w-auto min-w-[120px] max-w-[160px] px-3 py-2.5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 truncate"
                   >
                     <option value="newest">Newest First</option>
                     <option value="oldest">Oldest First</option>
@@ -120,7 +120,7 @@ export default function Posts({ publication, posts }: Props) {
                   <select
                     value={filterTag}
                     onChange={(e) => setFilterTag(e.target.value)}
-                    className="w-full sm:w-auto min-w-[140px] px-3 py-2.5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
+                    className="w-full sm:w-auto min-w-[120px] max-w-[160px] px-3 py-2.5 bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-600 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 truncate"
                   >
                     <option value="">All Tags</option>
                     {allTags.map((tag) => (

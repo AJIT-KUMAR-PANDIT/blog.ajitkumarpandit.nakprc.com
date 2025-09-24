@@ -141,7 +141,7 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 				</div>
 			)}
 			{/* Article Content */}
-			<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-pre:bg-gray-100 dark:prose-pre:bg-neutral-800">
+			<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-pre:bg-gray-100 dark:prose-pre:bg-neutral-800 prose-pre:overflow-x-auto prose-pre:max-w-full prose-code:break-words prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-video:max-w-full prose-iframe:max-w-full content-overflow-fix">
 				<MarkdownToHtml contentMarkdown={post.content.markdown} />
 			</div>
 			{/* Tags Section */}
@@ -181,9 +181,9 @@ export default function PostOrPage({ publication, post, page }: Props) {
 	return (
 		<AppProvider publication={publication} post={post}>
 			<Layout>
-			<Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:gap-10 lg:px-8 lg:py-10">
+			<Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:gap-10 lg:px-8 lg:py-10 overflow-hidden">
 				<PersonalHeader />
-				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10">
+				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10 w-full overflow-hidden">
 					{post ? Post(publication, post) : Page(page)}
 				</article>
 				<Footer />

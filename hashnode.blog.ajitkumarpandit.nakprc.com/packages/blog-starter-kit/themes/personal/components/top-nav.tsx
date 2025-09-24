@@ -125,7 +125,7 @@ export const TopNav = () => {
 					<div className="flex items-center gap-3">
 						<Link href="/" className="group flex items-center gap-3">
 							<Logo priority={true} />
-							<div className="hidden sm:block">
+							<div className="block">
 								<h1 className="group-hover:text-primary-600 dark:group-hover:text-primary-400 text-xl font-bold text-gray-900 transition-colors duration-300 dark:text-white">
 									{SITE_CONFIG.TITLE}
 								</h1>

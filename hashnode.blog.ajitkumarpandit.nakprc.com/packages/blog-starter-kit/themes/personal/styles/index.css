@@ -35,6 +35,35 @@
     @apply prose break-words text-slate-950 first:prose-p:mt-0 prose-img:max-w-full prose-p:leading-snug prose-a:underline hover:prose-a:bg-primary-50 dark:hover:prose-a:text-primary-500 dark:hover:prose-a:bg-neutral-800 dark:text-neutral-50 prose-blockquote:leading-snug prose-a:leading-snug prose-figure:leading-snug prose-figcaption:leading-snug prose-pre:leading-snug prose-li:leading-snug prose-ul:leading-snug prose-ol:leading-snug prose-th:leading-snug prose-td:leading-snug lg:prose-xl dark:prose-invert dark:prose-pre:bg-neutral-900 first:prose-h1:mt-0 first:prose-h2:mt-0 first:prose-h3:mt-0 first:prose-h4:mt-0 first:prose-h5:mt-0;
   }
   
+  /* Overflow handling for content elements */
+  .content-overflow-fix {
+    @apply overflow-hidden;
+  }
+  
+  .content-overflow-fix pre {
+    @apply overflow-x-auto max-w-full whitespace-pre-wrap break-words;
+  }
+  
+  .content-overflow-fix code {
+    @apply break-words max-w-full;
+  }
+  
+  .content-overflow-fix table {
+    @apply block overflow-x-auto whitespace-nowrap max-w-full;
+  }
+  
+  .content-overflow-fix img, 
+  .content-overflow-fix video,
+  .content-overflow-fix iframe {
+    @apply max-w-full h-auto;
+  }
+  
+  .content-overflow-fix p {
+    @apply break-words;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
   /* Button styles */
   .btn {
     @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
