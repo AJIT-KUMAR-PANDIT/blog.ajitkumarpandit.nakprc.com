@@ -553,17 +553,19 @@ export default function Search({ publication, posts }: Props) {
                       Clear all
                     </button>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 w-full overflow-hidden">
                     {recentSearches.map((search, index) => (
                       <button
                         key={index}
                         onClick={() => handleSearchSubmit(search)}
-                        className="inline-flex items-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors duration-200 text-sm"
+                        className="inline-flex items-center space-x-2 px-3 py-2 bg-gray-100 dark:bg-neutral-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-neutral-700 transition-colors duration-200 text-sm max-w-xs overflow-hidden"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>{search}</span>
+                        <span className="truncate break-words min-w-0" title={search}>
+                          {search.length > 20 ? `${search.substring(0, 20)}...` : search}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -575,7 +577,7 @@ export default function Search({ publication, posts }: Props) {
                 <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">
                   Popular Topics
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 w-full overflow-hidden">
                   {/* Extract unique tags from posts */}
                   {Array.from(
                     new Set(
@@ -589,12 +591,12 @@ export default function Search({ publication, posts }: Props) {
                       <button
                         key={tagName}
                         onClick={() => handleSearchSubmit(tagName)}
-                        className="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all duration-200 text-left group min-h-[48px] flex items-center"
+                        className="p-3 sm:p-4 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-lg hover:border-primary-300 dark:hover:border-primary-700 hover:shadow-md transition-all duration-200 text-left group min-h-[48px] w-full overflow-hidden"
                       >
-                        <div className="flex items-center space-x-2 sm:space-x-3">
+                        <div className="flex items-center space-x-2 sm:space-x-3 w-full min-w-0">
                           <div className="w-2 h-2 bg-primary-500 rounded-full group-hover:scale-125 transition-transform duration-200 flex-shrink-0" />
-                          <span className="text-sm sm:text-base font-medium text-gray-900 dark:text-white truncate">
-                            {tagName}
+                          <span className="text-sm sm:text-base font-medium text-gray-900 dark:text-white truncate min-w-0 break-words" title={tagName}>
+                            {tagName.length > 25 ? `${tagName.substring(0, 25)}...` : tagName}
                           </span>
                         </div>
                       </button>
