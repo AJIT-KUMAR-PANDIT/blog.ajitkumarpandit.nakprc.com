@@ -8,6 +8,7 @@ import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { MinimalPostPreview } from '../components/minimal-post-preview';
 import { PostCardSkeleton } from '../components/loading-skeletons';
+import { TopNav } from '../components/top-nav';
 import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
@@ -78,7 +79,8 @@ export default function Posts({ publication, posts }: Props) {
           />
         </Head>
 
-        <Container className="mx-auto flex max-w-4xl flex-col items-stretch gap-8 px-5 py-10">
+        <TopNav />
+        <Container className="mx-auto flex max-w-4xl flex-col items-stretch gap-8 px-5 py-10 pt-24">
           {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">

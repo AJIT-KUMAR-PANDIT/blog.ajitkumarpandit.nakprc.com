@@ -6,6 +6,7 @@ import { resizeImage } from '@starter-kit/utils/image';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
+import { TopNav } from '../components/top-nav';
 import {
   PublicationByHostDocument,
   PublicationByHostQuery,
@@ -38,7 +39,8 @@ export default function About({ publication }: Props) {
           />
         </Head>
 
-        <Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
+        <TopNav />
+        <Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10 pt-24">
           {/* Hero Section */}
           <div className="text-center space-y-6">
             <div className="relative inline-block">

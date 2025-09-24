@@ -8,6 +8,7 @@ import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { MinimalPostPreview } from '../components/minimal-post-preview';
+import { TopNav } from '../components/top-nav';
 import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
@@ -79,7 +80,8 @@ export default function Search({ publication, posts }: Props) {
           />
         </Head>
 
-        <Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
+        <TopNav />
+        <Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10 pt-24">
           {/* Search Header */}
           <div className="text-center space-y-4">
             <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 dark:bg-primary-900/20 rounded-full mb-4">
