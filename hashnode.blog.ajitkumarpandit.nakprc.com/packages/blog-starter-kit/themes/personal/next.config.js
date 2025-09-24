@@ -19,6 +19,7 @@ const config = {
 		scrollRestoration: true,
 	},
 	images: {
+		domains: ['cdn.hashnode.com', 'ajitkumarpandit.nakprc.com'],
 		remotePatterns: [
 			{
 				protocol: 'https',
