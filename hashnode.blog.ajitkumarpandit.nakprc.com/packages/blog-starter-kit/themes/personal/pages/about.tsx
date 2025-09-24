@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import request from 'graphql-request';
 import { resizeImage } from '@starter-kit/utils/image';
 import { Container } from '../components/container';
@@ -38,32 +39,36 @@ export default function About({ publication }: Props) {
           />
         </Head>
 
-        <Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
+        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:gap-10 lg:px-8 lg:py-10">
           {/* Hero Section */}
-          <div className="text-center space-y-6">
+          <div className="text-center space-y-4 sm:space-y-6">
             <div className="relative inline-block">
               {author.profilePicture && (
                 <div className="relative">
-                  <img
-                    className="w-32 h-32 rounded-full mx-auto border-4 border-white dark:border-neutral-800 shadow-xl"
+                  <Image
+                    className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full mx-auto border-4 border-white dark:border-neutral-800 shadow-xl object-cover"
                     alt={author.name}
                     src={resizeImage(author.profilePicture, {
                       w: 400,
                       h: 400,
                       c: 'face',
                     })}
+                    width={160}
+                    height={160}
+                    priority
+                    sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 160px"
                   />
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white dark:border-neutral-950 animate-pulse" />
+                  <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-2 sm:border-4 border-white dark:border-neutral-950 animate-pulse" />
                 </div>
               )}
             </div>
             
-            <div className="space-y-2">
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+            <div className="space-y-2 sm:space-y-3">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                 {author.name}
               </h1>
               {author.tagline && (
-                <p className="text-xl text-gray-600 dark:text-gray-400">
+                <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
                   {author.tagline}
                 </p>
               )}
@@ -72,47 +77,47 @@ export default function About({ publication }: Props) {
 
           {/* Bio Section */}
           {author.bio && (
-            <div className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-200 dark:border-neutral-700 shadow-lg">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
                 About Me
               </h2>
               <div 
-                className="prose prose-gray dark:prose-invert max-w-none"
+                className="prose prose-sm sm:prose-base lg:prose-lg prose-gray dark:prose-invert max-w-none prose-p:leading-relaxed prose-headings:text-gray-900 dark:prose-headings:text-white"
                 dangerouslySetInnerHTML={{ __html: author.bio.html }}
               />
             </div>
           )}
 
           {/* Publication Info */}
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-2xl p-8 border border-primary-200 dark:border-primary-800">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-2xl p-4 sm:p-6 lg:p-8 border border-primary-200 dark:border-primary-800 shadow-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
               About This Blog
             </h2>
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-primary-700 dark:text-primary-300">
+            <div className="space-y-3 sm:space-y-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-primary-700 dark:text-primary-300">
                 {publication.title}
               </h3>
               {publication.descriptionSEO && (
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
                   {publication.descriptionSEO}
                 </p>
               )}
               
               {/* Blog Stats */}
-              <div className="grid grid-cols-2 gap-4 mt-6">
-                <div className="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-600">
-                  <div className="text-2xl font-bold text-primary-500">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mt-4 sm:mt-6">
+                <div className="text-center p-3 sm:p-4 bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-600 shadow-sm">
+                  <div className="text-xl sm:text-2xl font-bold text-primary-500">
                     {publication.postsCount?.totalDocuments || '0'}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     Articles Published
                   </div>
                 </div>
-                <div className="text-center p-4 bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-600">
-                  <div className="text-2xl font-bold text-primary-500">
+                <div className="text-center p-3 sm:p-4 bg-white dark:bg-neutral-800 rounded-lg border border-gray-200 dark:border-neutral-600 shadow-sm">
+                  <div className="text-xl sm:text-2xl font-bold text-primary-500">
                     {publication.followersCount || '0'}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                     Followers
                   </div>
                 </div>
@@ -121,19 +126,19 @@ export default function About({ publication }: Props) {
           </div>
 
           {/* Social Links */}
-          <div className="bg-white dark:bg-neutral-900 rounded-2xl p-8 border border-gray-200 dark:border-neutral-700">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+          <div className="bg-white dark:bg-neutral-900 rounded-2xl p-4 sm:p-6 lg:p-8 border border-gray-200 dark:border-neutral-700 shadow-lg">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
               Connect With Me
             </h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
               {/* Twitter */}
               {author.socialMediaLinks?.twitter && (
                 <a
                   href={author.socialMediaLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors duration-200 group"
+                  className="flex items-center space-x-3 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all duration-200 group transform hover:scale-105"
                 >
                   <div className="flex-shrink-0">
                     <svg className="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
@@ -153,7 +158,7 @@ export default function About({ publication }: Props) {
                   href={author.socialMediaLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors duration-200 group"
+                  className="flex items-center space-x-3 p-3 sm:p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-all duration-200 group transform hover:scale-105"
                 >
                   <div className="flex-shrink-0">
                     <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
@@ -173,7 +178,7 @@ export default function About({ publication }: Props) {
                   href={author.socialMediaLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-900/20 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900/40 transition-colors duration-200 group"
+                  className="flex items-center space-x-3 p-3 sm:p-4 bg-gray-50 dark:bg-gray-900/20 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-900/40 transition-all duration-200 group transform hover:scale-105"
                 >
                   <div className="flex-shrink-0">
                     <svg className="w-6 h-6 text-gray-700 dark:text-gray-300" fill="currentColor" viewBox="0 0 24 24">
@@ -193,7 +198,7 @@ export default function About({ publication }: Props) {
                   href={author.socialMediaLinks.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors duration-200 group"
+                  className="flex items-center space-x-3 p-3 sm:p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800 hover:bg-green-100 dark:hover:bg-green-900/40 transition-all duration-200 group transform hover:scale-105"
                 >
                   <div className="flex-shrink-0">
                     <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,22 +215,22 @@ export default function About({ publication }: Props) {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl p-8 text-white">
-            <div className="text-center space-y-4">
-              <h2 className="text-2xl font-bold">
+          <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-lg">
+            <div className="text-center space-y-3 sm:space-y-4">
+              <h2 className="text-xl sm:text-2xl font-bold">
                 Stay Updated
               </h2>
-              <p className="text-primary-100">
+              <p className="text-sm sm:text-base text-primary-100">
                 Subscribe to get notified about new articles and updates.
               </p>
               <div className="max-w-md mx-auto">
-                <div className="flex gap-2">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="flex-1 px-4 py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50"
+                    className="flex-1 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm sm:text-base"
                   />
-                  <button className="px-6 py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                  <button className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 text-sm sm:text-base whitespace-nowrap">
                     Subscribe
                   </button>
                 </div>
