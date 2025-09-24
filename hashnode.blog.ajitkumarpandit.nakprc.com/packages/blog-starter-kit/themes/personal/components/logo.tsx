@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ASSETS } from '../lib/constants';
 
 interface LogoProps {
@@ -14,13 +15,13 @@ export const Logo = ({
 	priority = true,
 }: LogoProps) => {
 	return (
-		<img
+		<Image
 			src={ASSETS.LOGO}
 			alt={ASSETS.LOGO_ALT}
 			width={width}
 			height={height}
 			className={className}
-			style={{ width: width, height: height }}
+			unoptimized={true}
 		/>
 	);
 };
