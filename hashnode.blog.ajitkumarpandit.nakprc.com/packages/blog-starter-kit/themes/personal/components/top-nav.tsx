@@ -1,6 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { PublicationNavbarItem, PostFragment } from '../generated/graphql';
 import { useAppContext } from './contexts/appContext';
 import { ThemeToggle } from './theme-toggle';
@@ -34,6 +34,45 @@ export const TopNav = () => {
 	const [posts, setPosts] = useState<PostFragment[]>([]);
 	const [topicsWithPosts, setTopicsWithPosts] = useState<TopicsWithPosts>({});
 	const [isLoading, setIsLoading] = useState(false);
+	
+	// Quick actions state
+	const [showQuickActions, setShowQuickActions] = useState(false);
+	const menuRef = useRef<HTMLDivElement>(null);
+
+	// Handle subscribe button click
+	const handleSubscribeClick = () => {
+		setShowQuickActions(false);
+		const subscribeSection = document.getElementById('subscribe');
+		if (subscribeSection) {
+			subscribeSection.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			window.location.href = '/#subscribe';
+		}
+	};
+
+	// Handle share button click
+	const handleShareClick = async () => {
+		setShowQuickActions(false);
+		const currentUrl = window.location.href;
+		
+		if (navigator.share) {
+			try {
+				await navigator.share({
+					title: document.title,
+					url: currentUrl
+				});
+			} catch (err) {
+				console.log('Share cancelled');
+			}
+		} else {
+			try {
+				await navigator.clipboard.writeText(currentUrl);
+				alert('URL copied to clipboard!');
+			} catch (err) {
+				console.error('Failed to copy URL');
+			}
+		}
+	};
 
 	// Fetch posts when off-canvas opens
 	useEffect(() => {
@@ -95,11 +134,18 @@ export const TopNav = () => {
 		fetchPosts();
 	}, [isOffCanvasOpen, posts.length]);
 
-	// Close off-canvas when clicking outside
+	// Close menus when clicking outside
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
 				setIsOffCanvasOpen(false);
+				setShowQuickActions(false);
+			}
+		};
+		
+		const handleClickOutside = (event: MouseEvent) => {
+			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+				setShowQuickActions(false);
 			}
 		};
 		
@@ -110,11 +156,17 @@ export const TopNav = () => {
 			document.body.style.overflow = 'unset';
 		}
 		
+		if (showQuickActions) {
+			document.addEventListener('mousedown', handleClickOutside);
+			document.addEventListener('keydown', handleEscape);
+		}
+		
 		return () => {
 			document.removeEventListener('keydown', handleEscape);
+			document.removeEventListener('mousedown', handleClickOutside);
 			document.body.style.overflow = 'unset';
 		};
-	}, [isOffCanvasOpen]);
+	}, [isOffCanvasOpen, showQuickActions]);
 
 	return (
 		<>
@@ -229,28 +281,6 @@ export const TopNav = () => {
 							)}
 						</div>
 
-						{/* Subscribe Button */}
-						<a
-							href="#subscribe"
-							className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 hidden items-center rounded-lg px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 sm:inline-flex"
-							onClick={(e) => {
-								e.preventDefault();
-								const subscribeSection = document.getElementById('subscribe');
-								if (subscribeSection) {
-									subscribeSection.scrollIntoView({ behavior: 'smooth' });
-								}
-							}}
-						>
-							<svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth={2}
-									d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-								/>
-							</svg>
-							Subscribe
-						</a>
 
 						{/* Mobile menu button */}
 						<button 

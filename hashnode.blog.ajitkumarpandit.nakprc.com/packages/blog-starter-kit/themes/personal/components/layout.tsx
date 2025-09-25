@@ -7,6 +7,7 @@ import { Scripts } from './scripts';
 import { TopNav } from './top-nav';
 import { useAppContext } from './contexts/appContext';
 import { NewsletterSubscription } from './newsletter-subscription';
+import { ScrollToTop } from './scroll-to-top';
 
 type Props = {
 	children: React.ReactNode;
@@ -22,7 +23,8 @@ export const Layout = ({ children }: Props) => {
 				<TopNav />
 			<div className="min-h-screen bg-gray-50 dark:bg-neutral-950 transition-colors duration-300">
 					{/* Add top padding to account for fixed nav height with mobile-specific adjustments */}
-					<main className="pt-20 pb-24 lg:pb-8 font-sans antialiased overflow-x-hidden">
+					{/* Reduced padding-top since individual pages now handle their own spacing */}
+					<main className="pt-16 pb-24 lg:pb-8 font-sans antialiased overflow-x-hidden">
 						{/* Mobile-specific styles */}
 						<div className="sm:hidden">
 							<style jsx>{`
@@ -48,10 +50,11 @@ export const Layout = ({ children }: Props) => {
 						</div>
 						{children}
 					</main>
-					{/* Global bottom navigation (mobile) with improved positioning */}
-					<div className="block lg:hidden">
-						<BottomNavigation />
-					</div>
+					{/* Global bottom navigation with improved positioning */}
+					<BottomNavigation />
+					
+					{/* Scroll to Top Button */}
+					<ScrollToTop />
 				</div>
 				{/* Newsletter section - Full width */}
 				<div className="bg-white dark:bg-neutral-950 py-16">

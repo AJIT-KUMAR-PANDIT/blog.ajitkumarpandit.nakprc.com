@@ -8,7 +8,6 @@ import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { MinimalPostPreview } from '../components/minimal-post-preview';
-import { TopNav } from '../components/top-nav';
 import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
@@ -240,23 +239,27 @@ export default function Search({ publication, posts }: Props) {
           />
         </Head>
 
-        <TopNav />
-        <Container className="mx-auto max-w-4xl px-4 sm:px-5 py-6 sm:py-10 pt-20 sm:pt-24 min-h-screen">
-          <div className="flex flex-col gap-6 sm:gap-8 lg:gap-10 w-full overflow-hidden">
-          {/* Search Header */}
-          <div className="text-center space-y-3 sm:space-y-4">
-            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-primary-100 dark:bg-primary-900/20 rounded-full mb-3 sm:mb-4">
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+        {/* Hero Section - Full Width */}
+        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-br from-blue-50 via-white to-primary-50 dark:from-blue-950/20 dark:via-neutral-950 dark:to-neutral-900 border-b border-gray-100 dark:border-neutral-800">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+            <div className="text-center space-y-4 sm:space-y-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-primary-100 dark:bg-primary-900/20 rounded-full mb-4 sm:mb-6">
+                <svg className="w-8 h-8 sm:w-10 sm:h-10 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+              <h1 className="text-fluid-hero font-bold text-gray-900 dark:text-white leading-tight">
+                Search Articles
+              </h1>
+              <p className="text-fluid-subhero text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Find articles, tutorials, and insights from {publication.title}
+              </p>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-              Search Articles
-            </h1>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-md mx-auto px-4">
-              Find articles, tutorials, and insights from {publication.title}
-            </p>
           </div>
+        </div>
+        
+        <Container className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12 min-h-screen">
+          <div className="flex flex-col gap-6 sm:gap-8 lg:gap-10 w-full overflow-hidden">
 
           {/* Search Input with Suggestions */}
           <div className="relative">

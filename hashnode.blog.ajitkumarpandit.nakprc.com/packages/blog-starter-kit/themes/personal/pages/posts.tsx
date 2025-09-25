@@ -9,7 +9,6 @@ import { Layout } from '../components/layout';
 import { MinimalPostPreview } from '../components/minimal-post-preview';
 import { NewsletterSubscription } from '../components/newsletter-subscription';
 import { PostCardSkeleton } from '../components/loading-skeletons';
-import { TopNav } from '../components/top-nav';
 import {
   PostsByPublicationDocument,
   PostsByPublicationQuery,
@@ -80,17 +79,21 @@ export default function Posts({ publication, posts }: Props) {
           />
         </Head>
 
-        <TopNav />
-        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-10 pt-24 sm:px-6 lg:px-8">
-          {/* Header */}
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
-              All Posts
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Explore all {posts.length} articles on {publication.title}
-            </p>
+        {/* Hero Section - Full Width */}
+        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-br from-primary-50 via-white to-blue-50 dark:from-neutral-900 dark:via-neutral-950 dark:to-blue-950/20 border-b border-gray-100 dark:border-neutral-800">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+            <div className="text-center space-y-4 sm:space-y-6">
+              <h1 className="text-fluid-hero font-bold text-gray-900 dark:text-white leading-tight">
+                All Posts
+              </h1>
+              <p className="text-fluid-subhero text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Explore all {posts.length} articles on {publication.title}
+              </p>
+            </div>
           </div>
+        </div>
+        
+        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 lg:px-8">
 
           {/* Filters and Controls */}
           <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-gray-200 dark:border-neutral-700 p-4 sm:p-6">

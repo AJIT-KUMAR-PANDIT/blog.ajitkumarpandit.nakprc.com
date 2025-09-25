@@ -40,41 +40,46 @@ export default function About({ publication }: Props) {
           />
         </Head>
 
-        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:gap-10 lg:px-8 lg:py-10">
-          {/* Hero Section */}
-          <div className="text-center space-y-4 sm:space-y-6">
-            <div className="relative inline-block">
-              {author.profilePicture && (
-                <div className="relative">
-                  <Image
-                    className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full mx-auto border-4 border-white dark:border-neutral-800 shadow-xl object-cover"
-                    alt={author.name}
-                    src={resizeImage(author.profilePicture, {
-                      w: 400,
-                      h: 400,
-                      c: 'face',
-                    })}
-                    width={160}
-                    height={160}
-                    priority
-                    sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 160px"
-                  />
-                  <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-2 sm:border-4 border-white dark:border-neutral-950 animate-pulse" />
-                </div>
-              )}
-            </div>
-            
-            <div className="space-y-2 sm:space-y-3">
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                {author.name}
-              </h1>
-              {author.tagline && (
-                <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                  {author.tagline}
-                </p>
-              )}
+        {/* Hero Section - Full Width */}
+        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-br from-green-50 via-white to-primary-50 dark:from-green-950/20 dark:via-neutral-950 dark:to-neutral-900 border-b border-gray-100 dark:border-neutral-800">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+            <div className="text-center space-y-4 sm:space-y-6">
+              <div className="relative inline-block">
+                {author.profilePicture && (
+                  <div className="relative">
+                    <Image
+                      className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full mx-auto border-4 border-white dark:border-neutral-800 shadow-xl object-cover"
+                      alt={author.name}
+                      src={resizeImage(author.profilePicture, {
+                        w: 400,
+                        h: 400,
+                        c: 'face',
+                      })}
+                      width={160}
+                      height={160}
+                      priority
+                      sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 160px"
+                    />
+                    <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-2 sm:border-4 border-white dark:border-neutral-950 animate-pulse" />
+                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-2 sm:space-y-3">
+                <h1 className="text-fluid-hero font-bold text-gray-900 dark:text-white leading-tight">
+                  {author.name}
+                </h1>
+                {author.tagline && (
+                  <p className="text-fluid-subhero text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                    {author.tagline}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
+        </div>
+
+        <Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
 
           {/* Bio Section */}
           {author.bio && (

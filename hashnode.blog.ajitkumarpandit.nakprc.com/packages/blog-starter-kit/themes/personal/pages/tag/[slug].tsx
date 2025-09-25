@@ -7,7 +7,6 @@ import { Container } from '../../components/container';
 import { AppProvider } from '../../components/contexts/appContext';
 import { Layout } from '../../components/layout';
 import { MinimalPosts } from '../../components/minimal-posts';
-import { PersonalHeader } from '../../components/personal-theme-header';
 import {
 	PostFragment,
 	PublicationFragment,
@@ -43,12 +42,25 @@ export default function Tag({ publication, posts, tag }: Props) {
 						dangerouslySetInnerHTML={{ __html: JSON.stringify(addPublicationJsonLd(publication)) }}
 					/>
 				</Head>
-				<Container className="mx-auto flex max-w-2xl flex-col items-stretch gap-10 px-5 py-10">
-					<PersonalHeader />
-					<div className="flex flex-col gap-1 pt-5">
-						<p className="font-bold uppercase text-slate-500 dark:text-neutral-400">Tag</p>
-						<h1 className="text-4xl font-bold text-slate-900 dark:text-neutral-50">#{tag}</h1>
+				{/* Hero Section - Full Width */}
+				<div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-gradient-to-br from-primary-50 via-white to-purple-50 dark:from-primary-900/20 dark:via-neutral-950 dark:to-purple-950/20 border-b border-gray-100 dark:border-neutral-800">
+					<div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+						<div className="text-center space-y-4 sm:space-y-6">
+							<div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-primary-100 dark:bg-primary-900/20 rounded-full mb-4 sm:mb-6">
+								<svg className="w-8 h-8 sm:w-10 sm:h-10 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+								</svg>
+							</div>
+							<p className="text-sm font-bold uppercase text-primary-600 dark:text-primary-400 tracking-wider">Tag</p>
+							<h1 className="text-fluid-hero font-bold text-gray-900 dark:text-white leading-tight">#{tag}</h1>
+							<p className="text-fluid-subhero text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+								{posts.length} {posts.length === 1 ? 'article' : 'articles'} tagged with #{tag}
+							</p>
+						</div>
 					</div>
+				</div>
+
+				<Container className="mx-auto flex max-w-4xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
 				</Container>
 			</Layout>

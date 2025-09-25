@@ -13,7 +13,6 @@ import { CoverImage } from '../components/cover-image';
 import { DateFormatter } from '../components/date-formatter';
 import { Layout } from '../components/layout';
 import { EnhancedMarkdown } from '../components/enhanced-markdown';
-import { PersonalHeader } from '../components/personal-theme-header';
 import {
 	PageByPublicationDocument,
 	PageByPublicationQuery,
@@ -209,8 +208,8 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 				<style dangerouslySetInnerHTML={{ __html: vibrantSyntaxHighlighting }}></style>
 			</Head>
 			{/* Article Header */}
-			<div className="space-y-3 sm:space-y-4">
-				<h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight tracking-tight text-black dark:text-white">
+			<div className="space-y-4 sm:space-y-6">
+				<h1 className="text-fluid-hero font-bold leading-tight tracking-tight text-black dark:text-white">
 					{post.title}
 				</h1>
 				<div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
@@ -287,8 +286,7 @@ export default function PostOrPage({ publication, post, page }: Props) {
 	return (
 		<AppProvider publication={publication} post={post}>
 			<Layout>
-			<Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-6 px-4 py-6 sm:gap-8 sm:px-6 sm:py-8 lg:gap-10 lg:px-8 lg:py-10 overflow-hidden">
-				<PersonalHeader />
+			<Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 overflow-hidden">
 				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10 w-full overflow-hidden">
 					{post ? Post(publication, post) : Page(page)}
 				</article>

@@ -16,7 +16,7 @@ import { BreakingNewsBanner } from '../components/breaking-news-banner';
 import { CategoryNav } from '../components/category-nav';
 import { TrendingPostsSection } from '../components/trending-posts-section';
 import { FeaturedCategories } from '../components/featured-categories';
-import { FloatingActions } from '../components/floating-actions';
+import { HomepageQuickActions } from '../components/homepage-quick-actions';
 import {
 	MorePostsByPublicationDocument,
 	MorePostsByPublicationQuery,
@@ -206,8 +206,8 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					<FeaturedCategories posts={posts} />
 				)}
 
-				{/* Floating Actions */}
-				<FloatingActions />
+				{/* Homepage Quick Actions - Simple + button */}
+				<HomepageQuickActions />
 			</Layout>
 		</AppProvider>
 	);
