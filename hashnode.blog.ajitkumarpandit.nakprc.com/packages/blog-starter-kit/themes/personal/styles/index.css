@@ -150,6 +150,130 @@
     left: 100%;
   }
   
+  /* Text-to-Speech Component Styles */
+  .text-to-speech {
+    /* Container styles */
+  }
+  
+  /* Custom range slider styling */
+  .text-to-speech input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  
+  .text-to-speech input[type="range"]::-webkit-slider-track {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 4px;
+  }
+  
+  .dark .text-to-speech input[type="range"]::-webkit-slider-track {
+    background: #374151;
+  }
+  
+  .text-to-speech input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: #6366f1;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+  }
+  
+  .text-to-speech input[type="range"]::-webkit-slider-thumb:hover {
+    background: #4f46e5;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  }
+  
+  .text-to-speech input[type="range"]::-moz-range-track {
+    background: #e2e8f0;
+    height: 8px;
+    border-radius: 4px;
+    border: none;
+  }
+  
+  .dark .text-to-speech input[type="range"]::-moz-range-track {
+    background: #374151;
+  }
+  
+  .text-to-speech input[type="range"]::-moz-range-thumb {
+    background: #6366f1;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .text-to-speech input[type="range"]::-moz-range-thumb:hover {
+    background: #4f46e5;
+  }
+  
+  /* Button hover animations */
+  .text-to-speech button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .text-to-speech button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  
+  .text-to-speech button:active::before {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* Loading spinner */
+  .text-to-speech .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Progress bar animations */
+  .text-to-speech .progress-bar {
+    transition: width 0.3s ease-out;
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .text-to-speech .control-buttons {
+      gap: 0.5rem;
+    }
+    
+    .text-to-speech .settings-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .text-to-speech .text-info {
+      font-size: 0.75rem;
+    }
+  }
+  
   /* Custom code block styling - always dark theme */
   .custom-code-block {
     @apply bg-neutral-900 border border-neutral-700 rounded-lg overflow-hidden my-6 shadow-2xl;

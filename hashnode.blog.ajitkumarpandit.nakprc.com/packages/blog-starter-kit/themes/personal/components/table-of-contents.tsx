@@ -115,20 +115,12 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
 
     observer.current = new IntersectionObserver(
       (entries) => {
-        // Find the entry that's most visible
-        let bestEntry = null;
-        let bestRatio = 0;
-        
+        // Find the most visible entry
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-            bestEntry = entry;
-            bestRatio = entry.intersectionRatio;
+          if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+            setActiveId(entry.target.id);
           }
         });
-        
-        if (bestEntry) {
-          setActiveId(bestEntry.target.id);
-        }
       },
       {
         rootMargin: '-100px 0px -60% 0px', // Top margin matches our scroll offset

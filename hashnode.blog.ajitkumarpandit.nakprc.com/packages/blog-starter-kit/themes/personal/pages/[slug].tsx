@@ -14,6 +14,7 @@ import { DateFormatter } from '../components/date-formatter';
 import { Layout } from '../components/layout';
 import { EnhancedMarkdown } from '../components/enhanced-markdown';
 import { TableOfContents } from '../components/table-of-contents';
+import { TextToSpeech } from '../components/text-to-speech';
 import {
 	PageByPublicationDocument,
 	PageByPublicationQuery,
@@ -248,6 +249,12 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 			)}
 			{/* Table of Contents - Mobile */}
 			<TableOfContents showOnMobile={true} />
+			
+			{/* Text-to-Speech Player */}
+			<TextToSpeech 
+				content={post.content.markdown}
+				title={post.title}
+			/>
 			
 			{/* Article Content with Desktop TOC */}
 			<div className="relative">
