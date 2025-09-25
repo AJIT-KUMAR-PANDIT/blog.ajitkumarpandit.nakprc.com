@@ -233,7 +233,7 @@ export const TTSProvider: React.FC<TTSProviderProps> = ({ children }) => {
     play: () => {
       if (state.currentTrack && sentencesRef.current.length > 0) {
         try {
-          setState(prev => ({ ...prev, isLoading: true }));
+          setState(prev => ({ ...prev, isLoading: true, isVisible: true }));
           currentSentenceIndexRef.current = 0;
           speakSentence(0);
           setState(prev => ({
@@ -243,6 +243,7 @@ export const TTSProvider: React.FC<TTSProviderProps> = ({ children }) => {
             isLoading: false,
             progress: 0,
             currentSentence: 0,
+            isVisible: true,
           }));
         } catch (error) {
           console.error('Failed to play:', error);
@@ -278,6 +279,7 @@ export const TTSProvider: React.FC<TTSProviderProps> = ({ children }) => {
             ...prev,
             isPaused: false,
             isPlaying: true,
+            isVisible: true,
           }));
         }
       } catch (error) {

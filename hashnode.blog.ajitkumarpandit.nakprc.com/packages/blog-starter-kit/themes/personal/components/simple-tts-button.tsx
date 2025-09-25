@@ -36,6 +36,8 @@ export const SimpleTTSButton: React.FC<SimpleTTSButtonProps> = ({
       // Start playing this track
       actions.playTrack(track);
     }
+    // Always ensure player is visible when user interacts
+    actions.showPlayer();
   };
 
   if (variant === 'compact') {
