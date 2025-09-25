@@ -16,7 +16,7 @@ export const Footer = () => {
 	};
 
 	return (
-		<footer className="mt-20 w-full border-t border-gray-200/50 bg-white/80 py-12 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-950/80">
+		<footer className="mt-20 w-full border-t border-gray-200/50 bg-white/80 py-12 backdrop-blur-md dark:border-neutral-800/50 dark:bg-neutral-950/80 -mb-20 lg:mb-0">
 			<div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
 				<div className="mb-10 flex flex-col items-start justify-between gap-10 md:flex-row md:items-center">
 					{/* Left: About */}
@@ -156,12 +156,12 @@ export const Footer = () => {
 			</div>
 
 			{/* Marquee-like name scroller */}
-			<div className="mt-6 w-full overflow-hidden">
-				<div className="animate-slide relative flex w-max">
-					<h1 className="select-none whitespace-nowrap px-20 text-[20vw] font-extrabold leading-none opacity-10 dark:opacity-5">
+			<div className="mt-8 w-full overflow-x-hidden overflow-y-visible pb-12">
+				<div className="animate-slide relative flex w-max py-2">
+					<h1 className="select-none whitespace-nowrap px-20 text-[20vw] font-extrabold leading-none opacity-10 dark:opacity-5 py-2">
 						{publication.title}
 					</h1>
-					<h1 className="select-none whitespace-nowrap px-20 text-[20vw] font-extrabold leading-none opacity-10 dark:opacity-5">
+					<h1 className="select-none whitespace-nowrap px-20 text-[20vw] font-extrabold leading-none opacity-10 dark:opacity-5 py-2">
 						{publication.title}
 					</h1>
 				</div>
@@ -176,6 +176,7 @@ export const Footer = () => {
 					}
 					.animate-slide {
 						animation: slide 20s linear infinite;
+						will-change: transform;
 					}
 				`}</style>
 			</div>
