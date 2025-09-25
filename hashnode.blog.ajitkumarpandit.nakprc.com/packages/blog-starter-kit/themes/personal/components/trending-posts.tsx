@@ -63,9 +63,9 @@ export const TrendingPosts = ({ posts, title = "🔥 Trending Now", maxPosts = 5
                   
                   <span>·</span>
                   
-                  <span>
+                  <time dateTime={new Date(post.publishedAt).toISOString()} suppressHydrationWarning>
                     {formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })}
-                  </span>
+                  </time>
                 </div>
                 
                 {/* Tags */}

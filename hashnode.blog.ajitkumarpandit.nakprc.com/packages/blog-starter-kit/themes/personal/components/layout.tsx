@@ -21,9 +21,34 @@ export const Layout = ({ children }: Props) => {
 				{/* Global fixed top navigation */}
 				<TopNav />
 			<div className="min-h-screen bg-gray-50 dark:bg-neutral-950 transition-colors duration-300">
-					{/* Add top padding to account for fixed nav height */}
-					<main className="pt-20 pb-20 lg:pb-8 font-sans antialiased">{children}</main>
-					{/* Global bottom navigation (mobile) */}
+					{/* Add top padding to account for fixed nav height with mobile-specific adjustments */}
+					<main className="pt-20 pb-24 lg:pb-8 font-sans antialiased overflow-x-hidden">
+						{/* Mobile-specific styles */}
+						<div className="sm:hidden">
+							<style jsx>{`
+								@media (max-width: 640px) {
+									/* Optimize mobile scrolling */
+									body {
+										-webkit-overflow-scrolling: touch;
+										scroll-behavior: smooth;
+									}
+									
+									/* Prevent zoom on input focus */
+									input, textarea, select {
+										font-size: 16px !important;
+									}
+									
+									/* Better touch targets */
+									button, a {
+										min-height: 44px;
+										min-width: 44px;
+									}
+								}
+							`}</style>
+						</div>
+						{children}
+					</main>
+					{/* Global bottom navigation (mobile) with improved positioning */}
 					<div className="block lg:hidden">
 						<BottomNavigation />
 					</div>

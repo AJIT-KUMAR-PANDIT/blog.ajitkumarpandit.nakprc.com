@@ -152,6 +152,14 @@
     @apply bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm border border-gray-200/50 dark:border-neutral-800/50;
   }
   
+  .glass-strong {
+    @apply bg-white/90 dark:bg-neutral-900/90 backdrop-blur-lg border border-gray-200/60 dark:border-neutral-800/60 shadow-2xl;
+  }
+  
+  .glass-subtle {
+    @apply bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md border border-gray-200/40 dark:border-neutral-800/40;
+  }
+  
   /* Gradient text */
   .gradient-text {
     @apply bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent;
@@ -162,6 +170,34 @@
   /* Animation utilities */
   .animate-in {
     animation-fill-mode: both;
+  }
+  
+  /* Advanced hover effects */
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-glow:hover {
+    box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
+  }
+  
+  .hover-rainbow {
+    @apply relative overflow-hidden;
+  }
+  
+  .hover-rainbow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .hover-rainbow:hover::before {
+    left: 100%;
   }
   
   .fade-in-0 {
@@ -259,5 +295,212 @@
   .no-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+  
+  /* Morphing animations */
+  .morph-bounce {
+    animation: morph-bounce 2s ease-in-out infinite;
+  }
+  
+  @keyframes morph-bounce {
+    0%, 100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+      transform: translate3d(0, 0, 0) rotateZ(0.01deg);
+    }
+    34% {
+      border-radius: 70% 60% 70% 30% / 50% 60% 40% 50%;
+      transform: translate3d(0, 5px, 0) rotateZ(0.01deg);
+    }
+    67% {
+      border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+      transform: translate3d(0, -3px, 0) rotateZ(0.01deg);
+    }
+  }
+  
+  /* Loading shimmer */
+  .loading-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+  }
+  
+  @keyframes loading-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* Parallax effect */
+  .parallax {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  /* 3D card effect */
+  .card-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-3d:hover {
+    transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+  }
+  
+  /* Neon glow */
+  .neon-glow {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+  
+  /* Gradient border animation */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(45deg, #00a587, #059669, #047857);
+    background-size: 400% 400%;
+    animation: gradient-shift 4s ease infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  /* Mobile-first responsive utilities */
+  .mobile-optimized {
+    /* Optimize for mobile touch */
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+  
+  /* Mobile spacing */
+  .mobile-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-margin {
+    @apply mx-4 sm:mx-6 lg:mx-8;
+  }
+  
+  /* Mobile typography scale */
+  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
+  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .text-mobile-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .text-mobile-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .text-mobile-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  
+  /* Mobile-specific animations */
+  .mobile-fade-up {
+    animation: mobile-fade-up 0.6s ease-out;
+  }
+  
+  @keyframes mobile-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .mobile-slide-in {
+    animation: mobile-slide-in 0.4s ease-out;
+  }
+  
+  @keyframes mobile-slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Better mobile scrolling */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Mobile card optimizations */
+  .mobile-card {
+    @apply rounded-2xl shadow-lg border border-gray-200 dark:border-neutral-700 bg-white dark:bg-neutral-900;
+    /* Optimize for mobile performance */
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  .mobile-card:active {
+    transform: scale(0.98) translateZ(0);
+    transition: transform 0.1s ease-out;
+  }
+  
+  /* Mobile-specific breakpoint utilities */
+  @media (max-width: 480px) {
+    .xs\:hidden { display: none; }
+    .xs\:block { display: block; }
+    .xs\:flex { display: flex; }
+    .xs\:grid { display: grid; }
+    
+    .xs\:text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .xs\:text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .xs\:text-base { font-size: 1rem; line-height: 1.5rem; }
+    
+    .xs\:p-2 { padding: 0.5rem; }
+    .xs\:p-3 { padding: 0.75rem; }
+    .xs\:p-4 { padding: 1rem; }
+    
+    .xs\:space-y-2 > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 0.5rem;
+    }
+    
+    .xs\:space-y-3 > :not([hidden]) ~ :not([hidden]) {
+      margin-top: 0.75rem;
+    }
+  }
+  
+  /* PWA-like mobile experience */
+  .pwa-style {
+    /* Remove default mobile browser chrome */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Full viewport */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Mobile-optimized buttons */
+  .mobile-btn {
+    @apply touch-target px-6 py-3 rounded-xl font-semibold transition-all duration-200 active:scale-95;
+    /* Better mobile tap feedback */
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .mobile-btn-primary {
+    @apply mobile-btn bg-primary-500 text-white shadow-lg active:shadow-xl;
+  }
+  
+  .mobile-btn-secondary {
+    @apply mobile-btn bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white shadow-md;
   }
 }

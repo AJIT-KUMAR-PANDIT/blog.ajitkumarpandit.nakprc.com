@@ -136,7 +136,9 @@ export const EnhancedPostGrid = ({
                     {post.author.name}
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })}
+                    <time dateTime={new Date(post.publishedAt).toISOString()} suppressHydrationWarning>
+                      {formatDistanceToNow(new Date(post.publishedAt), { addSuffix: true })}
+                    </time>
                   </p>
                 </div>
               </div>

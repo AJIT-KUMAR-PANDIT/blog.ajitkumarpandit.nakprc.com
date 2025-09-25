@@ -14,6 +14,9 @@ import { DesktopSidebar } from '../components/desktop-sidebar';
 import { EnhancedPostGrid } from '../components/enhanced-post-grid';
 import { BreakingNewsBanner } from '../components/breaking-news-banner';
 import { CategoryNav } from '../components/category-nav';
+import { TrendingPostsSection } from '../components/trending-posts-section';
+import { FeaturedCategories } from '../components/featured-categories';
+import { FloatingActions } from '../components/floating-actions';
 import {
 	MorePostsByPublicationDocument,
 	MorePostsByPublicationQuery,
@@ -91,9 +94,9 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					<BreakingNewsBanner posts={posts} />
 				)}
 
-				{/* Hero Section with Responsive Design */}
-				<div className="bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
-					<Container className="mx-auto flex max-w-7xl flex-col items-stretch gap-10 px-5 py-10">
+				{/* Hero Section with Enhanced Mobile Responsive Design */}
+				<div className="bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 mobile-optimized">
+					<Container className="mx-auto flex max-w-7xl flex-col items-stretch gap-6 lg:gap-10 mobile-padding py-6 lg:py-10">
 						<PersonalHeader />
 					</Container>
 				</div>
@@ -103,25 +106,25 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					<CategoryNav posts={posts} />
 				)}
 
-				{/* Main Content with Sidebar Layout */}
-				<Container className="mx-auto max-w-7xl px-5 py-10">
+				{/* Main Content with Enhanced Mobile Responsive Layout */}
+				<Container className="mx-auto max-w-7xl mobile-padding py-6 lg:py-10">
 					{posts.length > 0 && (
-						<div className="flex flex-col xl:flex-row gap-12">
+						<div className="flex flex-col xl:flex-row gap-8 lg:gap-12">
 							{/* Main Content */}
-							<main className="flex-1 space-y-12">
+							<main className="flex-1 space-y-8 lg:space-y-12">
 								{/* Featured Article Hero */}
 								{posts.length > 0 && (
-									<section className="space-y-6">
+									<section className="space-y-4 lg:space-y-6 mobile-fade-up">
 										<div className="flex items-center justify-between">
-											<h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+											<h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
 												⭐ Featured Story
 											</h2>
-											<div className="hidden lg:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+											<div className="hidden sm:flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
 												<div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
 												<span className="font-medium">LIVE</span>
 											</div>
 										</div>
-										<div className="bg-white dark:bg-neutral-900 rounded-3xl border border-gray-200 dark:border-neutral-700 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
+										<div className="mobile-card hover:shadow-2xl transition-all duration-500 group">
 											<MinimalPosts context="home" posts={posts.slice(0, 1)} />
 										</div>
 									</section>
@@ -192,6 +195,23 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					)}
 
 				</Container>
+
+				{/* Trending Posts Section */}
+				{posts.length > 3 && (
+					<TrendingPostsSection 
+						posts={posts.slice(0, 6)}
+						showCount={3}
+						className="bg-white dark:bg-neutral-950"
+					/>
+				)}
+
+				{/* Featured Categories */}
+				{posts.length > 0 && (
+					<FeaturedCategories posts={posts} />
+				)}
+
+				{/* Floating Actions */}
+				<FloatingActions />
 			</Layout>
 		</AppProvider>
 	);

@@ -149,7 +149,7 @@ export const Footer = () => {
 				{/* Bottom border section */}
 				<div className="mt-8 border-t border-gray-200/50 pt-8 text-sm text-gray-600 dark:border-neutral-800/50 dark:text-gray-400">
 					<p>
-						&copy; {new Date().getFullYear()} {publication.title}. All rights reserved.
+						&copy; <span suppressHydrationWarning>{new Date().getFullYear()}</span> {publication.title}. All rights reserved.
 					</p>
 					<p className="mt-1">Designed and Developed with ❤️ by {publication.title}</p>
 				</div>

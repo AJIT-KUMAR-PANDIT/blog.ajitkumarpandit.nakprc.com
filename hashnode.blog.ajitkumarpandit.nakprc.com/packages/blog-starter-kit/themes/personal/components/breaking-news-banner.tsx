@@ -73,7 +73,9 @@ export const BreakingNewsBanner = ({
                   
                   {/* Metadata */}
                   <div className="hidden md:flex items-center gap-2 text-xs text-white/80 flex-shrink-0">
-                    <span>{formatDistanceToNow(new Date(currentPost.publishedAt), { addSuffix: true })}</span>
+                    <time dateTime={new Date(currentPost.publishedAt).toISOString()} suppressHydrationWarning>
+                      {formatDistanceToNow(new Date(currentPost.publishedAt), { addSuffix: true })}
+                    </time>
                     {currentPost.readTimeInMinutes && (
                       <>
                         <span>•</span>
@@ -151,7 +153,7 @@ export const BreakingNewsBanner = ({
           <div 
             className="h-full bg-white transition-all duration-100 ease-linear"
             style={{
-              width: `${((Date.now() % rotationInterval) / rotationInterval) * 100}%`
+              width: '100%' // Fixed width to avoid hydration mismatch with Date.now()
             }}
           ></div>
         </div>
