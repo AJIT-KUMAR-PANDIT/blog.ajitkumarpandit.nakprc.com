@@ -56,7 +56,7 @@ export const PersonalHeader = () => {
 
 	return (
 		<>
-		<header className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+		<header className="relative min-h-[80vh] w-screen flex items-center justify-center overflow-hidden">
 			{/* Enhanced Background with Multiple Layers */}
 			<div className="absolute inset-0">
 				{/* Primary gradient */}
@@ -101,7 +101,7 @@ export const PersonalHeader = () => {
 				.floating { animation: floating 6s ease-in-out infinite; }
 			`}</style>
 			
-			<div className="relative z-10 max-w-7xl mx-auto px-5 py-20">
+			<div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
 				{/* Modern Hero Layout */}
 				<div className="text-center space-y-12">
 					{/* Enhanced Profile Section */}
@@ -144,10 +144,10 @@ export const PersonalHeader = () => {
 						{/* Dynamic Title with Typing Animation */}
 						<div className="space-y-4">
 							<Link href="/" className="group block">
-								<h1 className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-primary-600 to-gray-900 dark:from-white dark:via-primary-400 dark:to-white leading-tight tracking-tight min-h-[1.2em]">
+								<h1 className="text-fluid-hero font-black text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-primary-600 to-gray-900 dark:from-white dark:via-primary-400 dark:to-white tracking-tight min-h-[1.2em] px-4 text-center break-words hyphens-auto max-w-7xl mx-auto">
 									{displayText}
 									{isClient && (
-										<span className={`inline-block w-1 ml-2 bg-primary-500 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`} style={{height: '0.8em'}}></span>
+										<span className={`inline-block w-1 ml-1 sm:ml-2 bg-primary-500 ${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-100`} style={{height: '0.8em'}}></span>
 									)}
 								</h1>
 								{/* Enhanced underline effect */}
@@ -158,7 +158,7 @@ export const PersonalHeader = () => {
 
 							{/* Enhanced Tagline */}
 							{publication.descriptionSEO && (
-								<p className="text-lg sm:text-xl lg:text-2xl xl:text-3xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto font-medium leading-relaxed opacity-90">
+								<p className="text-fluid-subhero text-gray-600 dark:text-gray-300 max-w-6xl mx-auto font-medium opacity-90 px-4 text-center">
 									{publication.descriptionSEO}
 								</p>
 							)}
@@ -168,74 +168,76 @@ export const PersonalHeader = () => {
 					{/* Enhanced Stats & Author Info */}
 					<div className="space-y-8">
 						{/* Author Badge with Glass Effect */}
-						<div className="inline-flex items-center gap-4 px-8 py-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105">
+						<div className="inline-flex items-center gap-2 sm:gap-4 px-4 sm:px-8 py-3 sm:py-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl border border-gray-200/50 dark:border-neutral-700/50 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 mx-4">
 							<div className="flex items-center gap-2">
-								<div className="w-3 h-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full animate-pulse shadow-lg"></div>
-								<span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+								<div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full animate-pulse shadow-lg"></div>
+								<span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
 									Curated by
 								</span>
 							</div>
-							<span className="text-lg font-bold bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
+							<span className="text-sm sm:text-lg font-bold bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
 								{publication.author.name}
 							</span>
 						</div>
 
 						{/* Enhanced Stats Grid */}
-						<div className="flex items-center justify-center gap-12 lg:gap-16">
+						<div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-16 px-4">
 							<div className="text-center group">
-								<div className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
+								<div className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
 									{publication.postsCount?.totalDocuments || 0}
 								</div>
-								<div className="text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-2">
+								<div className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-1 sm:mt-2">
 									Stories Published
 								</div>
-								<div className="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-2 rounded-full"></div>
+								<div className="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-1 sm:mt-2 rounded-full"></div>
 							</div>
 							
-							<div className="w-px h-16 bg-gradient-to-b from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
+							<div className="hidden sm:block w-px h-12 sm:h-16 bg-gradient-to-b from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
+							<div className="block sm:hidden w-16 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
 							
 							<div className="text-center group">
-								<div className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
+								<div className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
 									{publication.followersCount || '2.5K'}
 								</div>
-								<div className="text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-2">
+								<div className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-1 sm:mt-2">
 									Active Readers
 								</div>
-								<div className="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-2 rounded-full"></div>
+								<div className="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-1 sm:mt-2 rounded-full"></div>
 							</div>
 
-							<div className="w-px h-16 bg-gradient-to-b from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
+							<div className="hidden sm:block w-px h-12 sm:h-16 bg-gradient-to-b from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
+							<div className="block sm:hidden w-16 h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-neutral-600 to-transparent"></div>
 
 							<div className="text-center group">
-								<div className="text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
+								<div className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-primary-600 to-primary-500 group-hover:scale-110 transition-transform duration-300">
 									150K+
 								</div>
-								<div className="text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-2">
+								<div className="text-xs sm:text-sm lg:text-base text-gray-600 dark:text-gray-400 font-semibold mt-1 sm:mt-2">
 									Total Views
 								</div>
-								<div className="w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-2 rounded-full"></div>
+								<div className="w-6 sm:w-8 h-0.5 bg-gradient-to-r from-primary-500 to-primary-600 mx-auto mt-1 sm:mt-2 rounded-full"></div>
 							</div>
 						</div>
 					</div>
 
 					{/* Call to Action */}
-					<div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-						<button className="group relative px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden">
+					<div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-6 sm:pt-8 px-4">
+						<button className="group relative px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105 overflow-hidden w-full sm:w-auto">
 							<div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-primary-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-							<div className="relative flex items-center gap-2">
-								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<div className="relative flex items-center justify-center gap-2">
+								<svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
 								</svg>
-								Explore Articles
+								<span className="text-sm sm:text-base">Explore Articles</span>
 							</div>
 						</button>
 						
-						<button className="group px-8 py-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl text-gray-900 dark:text-white font-semibold rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-primary-300 dark:hover:border-primary-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
-							<div className="flex items-center gap-2">
-								<svg className="w-5 h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<button className="group px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-white/70 dark:bg-neutral-900/70 backdrop-blur-xl text-gray-900 dark:text-white font-semibold rounded-2xl border border-gray-200/50 dark:border-neutral-700/50 hover:border-primary-300 dark:hover:border-primary-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full sm:w-auto">
+							<div className="flex items-center justify-center gap-2">
+								<svg className="w-4 h-4 sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
 								</svg>
-								Subscribe to Newsletter
+								<span className="text-sm sm:text-base">Subscribe to Newsletter</span>
 							</div>
 						</button>
 					</div>

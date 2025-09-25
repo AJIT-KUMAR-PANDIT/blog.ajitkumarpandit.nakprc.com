@@ -94,12 +94,8 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 					<BreakingNewsBanner posts={posts} />
 				)}
 
-				{/* Hero Section with Enhanced Mobile Responsive Design */}
-				<div className="bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 mobile-optimized">
-					<Container className="mx-auto flex max-w-7xl flex-col items-stretch gap-6 lg:gap-10 mobile-padding py-6 lg:py-10">
-						<PersonalHeader />
-					</Container>
-				</div>
+				{/* Hero Section with Enhanced Mobile Responsive Design - Full Width */}
+				<PersonalHeader />
 
 				{/* Category Navigation */}
 				{posts.length > 0 && (
