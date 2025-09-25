@@ -44,45 +44,56 @@ export const TextToSpeech: React.FC<TextToSpeechProps> = ({
 
   // Check for browser support and load voices
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      setIsSupported(true);
-      
-      const loadVoices = () => {
-        const availableVoices = window.speechSynthesis.getVoices();
-        setVoices(availableVoices);
+    try {
+      if (typeof window !== 'undefined' && window.speechSynthesis) {
+        setIsSupported(true);
         
-        // Try to find a good default voice (English)
-        const englishVoice = availableVoices.findIndex(voice => 
-          voice.lang.startsWith('en') && voice.localService
-        );
-        if (englishVoice !== -1) {
-          setSettings(prev => ({ ...prev, voiceIndex: englishVoice }));
-        }
-      };
+        const loadVoices = () => {
+          const availableVoices = window.speechSynthesis.getVoices();
+          setVoices(availableVoices);
+          
+          // Try to find a good default voice (English)
+          const englishVoice = availableVoices.findIndex(voice => 
+            voice.lang.startsWith('en') && voice.localService
+          );
+          if (englishVoice !== -1) {
+            setSettings(prev => ({ ...prev, voiceIndex: englishVoice }));
+          }
+        };
 
-      // Load voices immediately if available
-      loadVoices();
-      
-      // Set up event listener for when voices are loaded
-      if (window.speechSynthesis.onvoiceschanged !== undefined) {
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-      }
+        // Load voices immediately if available
+        loadVoices();
+        
+        // Set up event listener for when voices are loaded
+        if (window.speechSynthesis.onvoiceschanged !== undefined) {
+          window.speechSynthesis.onvoiceschanged = loadVoices;
+        }
 
-      // Load saved settings
-      const savedSettings = localStorage.getItem('tts-settings');
-      if (savedSettings) {
-        try {
-          setSettings(JSON.parse(savedSettings));
-        } catch (e) {
-          console.warn('Failed to parse saved TTS settings');
+        // Load saved settings
+        const savedSettings = localStorage.getItem('tts-settings');
+        if (savedSettings) {
+          try {
+            setSettings(JSON.parse(savedSettings));
+          } catch (e) {
+            console.warn('Failed to parse saved TTS settings');
+          }
         }
       }
+    } catch (error) {
+      console.warn('Text-to-speech not supported:', error);
+      setIsSupported(false);
     }
   }, []);
 
   // Save settings to localStorage
   useEffect(() => {
-    localStorage.setItem('tts-settings', JSON.stringify(settings));
+    try {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        localStorage.setItem('tts-settings', JSON.stringify(settings));
+      }
+    } catch (error) {
+      console.warn('Failed to save TTS settings:', error);
+    }
   }, [settings]);
 
   // Extract text content from HTML
@@ -174,36 +185,57 @@ export const TextToSpeech: React.FC<TextToSpeechProps> = ({
 
     setIsLoading(true);
     
-    if (isPaused) {
-      window.speechSynthesis.resume();
+    try {
+      if (isPaused) {
+        window.speechSynthesis.resume();
+        setIsPaused(false);
+        setIsPlaying(true);
+      } else {
+        setIsPlaying(true);
+        setIsPaused(false);
+        currentSentenceIndex.current = 0;
+        setProgress(0);
+        speakSentence(0);
+      }
+    } catch (error) {
+      console.error('Failed to start speech synthesis:', error);
+      setIsPlaying(false);
       setIsPaused(false);
-      setIsPlaying(true);
-    } else {
-      setIsPlaying(true);
-      setIsPaused(false);
-      currentSentenceIndex.current = 0;
-      setProgress(0);
-      speakSentence(0);
     }
     
     setIsLoading(false);
   };
 
   const handlePause = () => {
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.pause();
-      setIsPaused(true);
+    try {
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.pause();
+        setIsPaused(true);
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('Failed to pause speech synthesis:', error);
       setIsPlaying(false);
+      setIsPaused(false);
     }
   };
 
   const handleStop = () => {
-    window.speechSynthesis.cancel();
-    setIsPlaying(false);
-    setIsPaused(false);
-    setProgress(0);
-    setCurrentSentence(0);
-    currentSentenceIndex.current = 0;
+    try {
+      window.speechSynthesis.cancel();
+      setIsPlaying(false);
+      setIsPaused(false);
+      setProgress(0);
+      setCurrentSentence(0);
+      currentSentenceIndex.current = 0;
+    } catch (error) {
+      console.error('Failed to stop speech synthesis:', error);
+      setIsPlaying(false);
+      setIsPaused(false);
+      setProgress(0);
+      setCurrentSentence(0);
+      currentSentenceIndex.current = 0;
+    }
   };
 
   const handleSettingChange = (key: keyof SpeechSettings, value: number) => {

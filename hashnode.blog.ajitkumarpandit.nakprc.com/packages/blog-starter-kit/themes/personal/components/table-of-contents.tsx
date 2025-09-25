@@ -96,7 +96,6 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({
         });
       });
       
-      console.log('TableOfContents: Generated TOC items:', items.map(item => ({ id: item.id, text: item.text, level: item.level })));
       setTocItems(items);
     }, 500); // Delay to ensure all content is rendered
 
