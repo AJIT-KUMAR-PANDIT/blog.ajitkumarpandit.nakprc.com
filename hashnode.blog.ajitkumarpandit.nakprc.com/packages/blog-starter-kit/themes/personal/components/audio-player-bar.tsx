@@ -5,10 +5,13 @@ import PauseSVG from './icons/svgs/PauseSVG';
 import StopSVG from './icons/svgs/StopSVG';
 import VolumeUpSVG from './icons/svgs/VolumeUpSVG';
 import ChevronDownSVG from './icons/svgs/ChevronDownSVG';
+import SettingsSVG from './icons/svgs/SettingsSVG';
+import TTSSettingsPanel from './tts-settings-panel';
 
 export const AudioPlayerBar: React.FC = () => {
   const { state, actions } = useTTS();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   if (!state.isVisible || !state.currentTrack) {
     return null;
@@ -93,6 +96,15 @@ export const AudioPlayerBar: React.FC = () => {
                   <StopSVG className="w-4 h-4" />
                 </button>
 
+                {/* Settings Button */}
+                <button
+                  onClick={() => setIsSettingsOpen(true)}
+                  className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
+                  title="Audio settings"
+                >
+                  <SettingsSVG className="w-4 h-4" />
+                </button>
+
                 {/* Close Button */}
                 <button
                   onClick={handleClose}
@@ -156,7 +168,7 @@ export const AudioPlayerBar: React.FC = () => {
                 </div>
 
                 {/* Controls */}
-                <div className="flex items-center justify-center space-x-6">
+                <div className="flex items-center justify-center space-x-4">
                   <button
                     onClick={actions.stop}
                     className="flex items-center justify-center w-12 h-12 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
@@ -178,6 +190,14 @@ export const AudioPlayerBar: React.FC = () => {
                     ) : (
                       <PlaySVG className="w-6 h-6 ml-1" />
                     )}
+                  </button>
+
+                  <button
+                    onClick={() => setIsSettingsOpen(true)}
+                    className="flex items-center justify-center w-12 h-12 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
+                    title="Audio settings"
+                  >
+                    <SettingsSVG className="w-5 h-5" />
                   </button>
 
                   <button
@@ -242,6 +262,14 @@ export const AudioPlayerBar: React.FC = () => {
                   </button>
 
                   <button
+                    onClick={() => setIsSettingsOpen(true)}
+                    className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
+                    title="Audio settings"
+                  >
+                    <SettingsSVG className="w-4 h-4" />
+                  </button>
+
+                  <button
                     onClick={handleClose}
                     className="flex items-center justify-center w-8 h-8 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-all duration-200"
                     title="Close player"
@@ -256,6 +284,12 @@ export const AudioPlayerBar: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Settings Panel */}
+      <TTSSettingsPanel 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+      />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useRef, useCallback } from 'react';
+import React, { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react';
 
 interface TTSTrack {
   id: string;
@@ -48,6 +48,34 @@ interface TTSProviderProps {
 }
 
 export const TTSProvider: React.FC<TTSProviderProps> = ({ children }) => {
+  // Load settings from localStorage
+  const loadSettings = () => {
+    if (typeof window === 'undefined') {
+      return {
+        rate: 1,
+        pitch: 1,
+        volume: 0.8,
+        voiceIndex: 0,
+      };
+    }
+    
+    try {
+      const saved = localStorage.getItem('tts-settings');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (error) {
+      console.warn('Failed to load TTS settings:', error);
+    }
+    
+    return {
+      rate: 1,
+      pitch: 1,
+      volume: 0.8,
+      voiceIndex: 0,
+    };
+  };
+
   const [state, setState] = useState<TTSState>({
     currentTrack: null,
     isPlaying: false,
@@ -57,13 +85,19 @@ export const TTSProvider: React.FC<TTSProviderProps> = ({ children }) => {
     currentSentence: 0,
     totalSentences: 0,
     isVisible: false,
-    settings: {
-      rate: 1,
-      pitch: 1,
-      volume: 0.8,
-      voiceIndex: 0,
-    },
+    settings: loadSettings(),
   });
+
+  // Save settings to localStorage when they change
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('tts-settings', JSON.stringify(state.settings));
+      } catch (error) {
+        console.warn('Failed to save TTS settings:', error);
+      }
+    }
+  }, [state.settings]);
 
   const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const sentencesRef = useRef<string[]>([]);
