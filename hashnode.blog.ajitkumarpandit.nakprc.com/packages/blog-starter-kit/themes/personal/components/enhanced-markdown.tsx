@@ -70,44 +70,52 @@ const _EnhancedMarkdown = ({ contentMarkdown }: Props) => {
           
           if (language && language !== 'text') {
             const langSpan = document.createElement('span');
-            langSpan.className = 'ml-3 text-xs font-mono text-cyan-300 bg-gradient-to-r from-purple-600/50 to-blue-600/50 px-3 py-1 rounded-full uppercase tracking-wide font-semibold border border-cyan-400/30';
+            langSpan.className = 'ml-3 text-xs font-mono px-3 py-1 rounded-full uppercase tracking-wide font-semibold';
             langSpan.textContent = language;
-            langSpan.style.textShadow = '0 0 10px rgba(0, 212, 255, 0.5)';
+            
+            // Set bright colors for maximum visibility
+            langSpan.style.color = '#ffffff';
+            langSpan.style.background = 'linear-gradient(135deg, #ff6b35, #f7931e)';
+            langSpan.style.border = '2px solid #ffffff';
+            langSpan.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 107, 53, 0.6)';
+            langSpan.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
             leftSection.appendChild(langSpan);
           }
           
           header.appendChild(leftSection);
           
-          // Copy button with explicit vibrant styling
+          // Copy button with high contrast styling for visibility
           const copyButton = document.createElement('button');
           copyButton.className = 'flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 focus:outline-none font-semibold';
           
-          // Set explicit styles for visibility
-          copyButton.style.color = '#00d4ff';
-          copyButton.style.background = 'linear-gradient(135deg, rgba(139, 69, 193, 0.8), rgba(219, 39, 119, 0.8))';
-          copyButton.style.border = '1px solid rgba(0, 212, 255, 0.5)';
-          copyButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
-          copyButton.style.textShadow = '0 0 8px rgba(0, 212, 255, 0.5)';
+          // Set high contrast colors for maximum visibility
+          copyButton.style.color = '#000000';
+          copyButton.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0)';
+          copyButton.style.border = '2px solid #333333';
+          copyButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.5)';
+          copyButton.style.textShadow = 'none';
           
-          // Hover effects
+          // Hover effects with bright colors
           copyButton.addEventListener('mouseenter', () => {
             copyButton.style.color = '#ffffff';
-            copyButton.style.background = 'linear-gradient(135deg, #8b45c1, #db2777)';
+            copyButton.style.background = 'linear-gradient(135deg, #4ade80, #22c55e)';
+            copyButton.style.border = '2px solid #ffffff';
             copyButton.style.transform = 'scale(1.05)';
-            copyButton.style.boxShadow = '0 6px 16px rgba(0, 212, 255, 0.4)';
+            copyButton.style.boxShadow = '0 6px 16px rgba(34, 197, 94, 0.4)';
           });
           
           copyButton.addEventListener('mouseleave', () => {
-            copyButton.style.color = '#00d4ff';
-            copyButton.style.background = 'linear-gradient(135deg, rgba(139, 69, 193, 0.8), rgba(219, 39, 119, 0.8))';
+            copyButton.style.color = '#000000';
+            copyButton.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0)';
+            copyButton.style.border = '2px solid #333333';
             copyButton.style.transform = 'scale(1)';
-            copyButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+            copyButton.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.5)';
           });
           copyButton.innerHTML = `
-            <svg style="width: 12px; height: 12px; color: #00d4ff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg style="width: 12px; height: 12px; color: #000000;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
             </svg>
-            <span style="color: #00d4ff; margin-left: 4px;">Copy</span>
+            <span style="color: #000000; margin-left: 4px;">Copy</span>
           `;
           
           // Copy functionality
@@ -115,25 +123,25 @@ const _EnhancedMarkdown = ({ contentMarkdown }: Props) => {
             try {
               await navigator.clipboard.writeText(codeText);
               copyButton.innerHTML = `
-                <svg style="width: 12px; height: 12px; color: #50fa7b;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg style="width: 12px; height: 12px; color: #ffffff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span style="color: #50fa7b; margin-left: 4px;">Copied!</span>
+                <span style="color: #ffffff; margin-left: 4px;">Copied!</span>
               `;
-              copyButton.style.color = '#50fa7b';
-              copyButton.style.background = 'linear-gradient(135deg, rgba(80, 250, 123, 0.2), rgba(139, 233, 253, 0.2))';
-              copyButton.style.border = '1px solid rgba(80, 250, 123, 0.5)';
+              copyButton.style.color = '#ffffff';
+              copyButton.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+              copyButton.style.border = '2px solid #ffffff';
               
               setTimeout(() => {
                 copyButton.innerHTML = `
-                  <svg style="width: 12px; height: 12px; color: #00d4ff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg style="width: 12px; height: 12px; color: #000000;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                   </svg>
-                  <span style="color: #00d4ff; margin-left: 4px;">Copy</span>
+                  <span style="color: #000000; margin-left: 4px;">Copy</span>
                 `;
-                copyButton.style.color = '#00d4ff';
-                copyButton.style.background = 'linear-gradient(135deg, rgba(139, 69, 193, 0.8), rgba(219, 39, 119, 0.8))';
-                copyButton.style.border = '1px solid rgba(0, 212, 255, 0.5)';
+                copyButton.style.color = '#000000';
+                copyButton.style.background = 'linear-gradient(135deg, #ffffff, #f0f0f0)';
+                copyButton.style.border = '2px solid #333333';
               }, 2000);
             } catch (err) {
               console.error('Failed to copy text: ', err);

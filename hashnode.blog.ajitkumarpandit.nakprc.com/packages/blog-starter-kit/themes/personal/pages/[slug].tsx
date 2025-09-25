@@ -110,13 +110,13 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 		/* Variables - Bright Blue */
 		.hljs-params,
 		.hljs-variable.language_,
-		.hljs-variable.constant_ { color: #8be9fd; }
+		.hljs-variable.constant_ { color: #8be9fd !important; }
 		
 		/* Deletion */
-		.hljs-deletion { color: #ff5555; background-color: rgba(255, 85, 85, 0.1); }
+		.hljs-deletion { color: #ff5555 !important; background-color: rgba(255, 85, 85, 0.1) !important; }
 		
 		/* Addition */
-		.hljs-addition { color: #57ff57; background-color: rgba(87, 255, 87, 0.1); }
+		.hljs-addition { color: #57ff57 !important; background-color: rgba(87, 255, 87, 0.1) !important; }
 		
 		/* Strong and emphasis */
 		.hljs-strong { font-weight: 700; }
