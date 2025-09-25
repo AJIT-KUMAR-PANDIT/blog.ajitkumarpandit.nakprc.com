@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from './contexts/appContext';
+import { useTTS } from './contexts/tts-context';
+import { SimpleTTSButton } from './simple-tts-button';
 
 export const FloatingActions = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const [progress, setProgress] = useState(0);
-  const { publication } = useAppContext();
+  const { publication, post } = useAppContext();
+  const { state: ttsState, actions: ttsActions } = useTTS();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -123,6 +126,20 @@ export const FloatingActions = () => {
                 </div>
               </div>
             </button>
+
+            {/* TTS Button - only show on post pages */}
+            {post && (
+              <SimpleTTSButton
+                track={{
+                  id: post.slug,
+                  title: post.title,
+                  content: post.content.markdown,
+                  author: post.author?.name,
+                  publishedAt: post.publishedAt,
+                }}
+                variant="compact"
+              />
+            )}
 
             {/* Scroll to Top - only show when user has scrolled */}
             {showScrollTop && (

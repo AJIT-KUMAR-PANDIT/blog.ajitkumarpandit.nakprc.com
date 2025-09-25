@@ -780,4 +780,66 @@
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
   }
+  
+  /* Audio Player Bar Styles */
+  .audio-player-bar {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  
+  /* Ensure content doesn't get hidden behind audio player */
+  body:has(.audio-player-bar) {
+    padding-bottom: 80px;
+  }
+  
+  @media (max-width: 768px) {
+    body:has(.audio-player-bar) {
+      padding-bottom: 60px;
+    }
+  }
+  
+  /* Audio player bar animations */
+  .audio-player-bar {
+    animation: slideUpFromBottom 0.3s ease-out;
+  }
+  
+  @keyframes slideUpFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Progress bar in audio player */
+  .audio-progress {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Hover effects for audio controls */
+  .audio-control-btn {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .audio-control-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  
+  .audio-control-btn:active::before {
+    width: 120px;
+    height: 120px;
+  }
 }

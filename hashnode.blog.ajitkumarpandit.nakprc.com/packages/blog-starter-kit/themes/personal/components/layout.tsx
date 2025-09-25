@@ -8,6 +8,8 @@ import { TopNav } from './top-nav';
 import { useAppContext } from './contexts/appContext';
 import { NewsletterSubscription } from './newsletter-subscription';
 import { ScrollToTop } from './scroll-to-top';
+import { TTSProvider } from './contexts/tts-context';
+import { AudioPlayerBar } from './audio-player-bar';
 
 type Props = {
 	children: React.ReactNode;
@@ -16,7 +18,7 @@ type Props = {
 export const Layout = ({ children }: Props) => {
 	const { publication } = useAppContext();
 	return (
-		<>
+		<TTSProvider>
 			<Meta />
 			<Scripts />
 				{/* Global fixed top navigation */}
@@ -65,6 +67,8 @@ export const Layout = ({ children }: Props) => {
 				<Footer />
 				<Analytics />
 				<Integrations />
-			</>
+				{/* Spotify-like Audio Player Bar */}
+				<AudioPlayerBar />
+			</TTSProvider>
 			);
 };
