@@ -20,9 +20,9 @@ export const Layout = ({ children }: Props) => {
 			<Scripts />
 				{/* Global fixed top navigation */}
 				<TopNav />
-				<div className="min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-300">
+			<div className="min-h-screen bg-gray-50 dark:bg-neutral-950 transition-colors duration-300">
 					{/* Add top padding to account for fixed nav height */}
-					<main className="pt-20 pb-20 lg:pb-8">{children}</main>
+					<main className="pt-20 pb-20 lg:pb-8 font-sans antialiased">{children}</main>
 					{/* Global bottom navigation (mobile) */}
 					<div className="block lg:hidden">
 						<BottomNavigation />

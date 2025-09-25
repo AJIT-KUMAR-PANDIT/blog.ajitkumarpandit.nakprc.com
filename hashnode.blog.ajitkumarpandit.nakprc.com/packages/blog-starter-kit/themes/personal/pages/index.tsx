@@ -10,6 +10,10 @@ import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { MinimalPosts } from '../components/minimal-posts';
 import { PersonalHeader } from '../components/personal-theme-header';
+import { DesktopSidebar } from '../components/desktop-sidebar';
+import { EnhancedPostGrid } from '../components/enhanced-post-grid';
+import { BreakingNewsBanner } from '../components/breaking-news-banner';
+import { CategoryNav } from '../components/category-nav';
 import {
 	MorePostsByPublicationDocument,
 	MorePostsByPublicationQuery,
@@ -82,47 +86,80 @@ export default function Index({ publication, initialPosts, initialPageInfo }: Pr
 						}}
 					/>
 				</Head>
+				{/* Breaking News Banner */}
+				{posts.length > 0 && (
+					<BreakingNewsBanner posts={posts} />
+				)}
+
 				{/* Hero Section with Responsive Design */}
 				<div className="bg-gradient-to-br from-primary-50 via-white to-primary-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
-					<Container className="mx-auto flex max-w-6xl flex-col items-stretch gap-10 px-5 py-10">
+					<Container className="mx-auto flex max-w-7xl flex-col items-stretch gap-10 px-5 py-10">
 						<PersonalHeader />
 					</Container>
 				</div>
 
-				{/* Main Content */}
-				<Container className="mx-auto flex max-w-6xl flex-col items-stretch gap-10 px-5 py-10">
-					{posts.length > 0 && (
-						<div className="space-y-8">
-							{/* Featured Post (First Post) */}
-							{posts.length > 0 && (
-								<section className="space-y-6">
-									<div className="flex items-center justify-between">
-										<h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-											✨ Featured Article
-										</h2>
-									</div>
-									<div className="lg:grid lg:grid-cols-1 gap-8">
-										<MinimalPosts context="home" posts={posts.slice(0, 1)} />
-									</div>
-								</section>
-							)}
+				{/* Category Navigation */}
+				{posts.length > 0 && (
+					<CategoryNav posts={posts} />
+				)}
 
-							{/* Recent Posts Grid */}
-							{posts.length > 1 && (
-								<section className="space-y-6">
-									<div className="flex items-center justify-between">
-										<h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-											📚 Recent Articles
-										</h2>
-										<span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-neutral-800 px-3 py-1 rounded-full">
-											{posts.length - 1} {posts.length - 1 === 1 ? 'post' : 'posts'}
-										</span>
-									</div>
-									<div className="grid gap-8 sm:grid-cols-1 lg:grid-cols-2">
-										<MinimalPosts context="home" posts={posts.slice(1)} />
-									</div>
-								</section>
-							)}
+				{/* Main Content with Sidebar Layout */}
+				<Container className="mx-auto max-w-7xl px-5 py-10">
+					{posts.length > 0 && (
+						<div className="flex flex-col xl:flex-row gap-12">
+							{/* Main Content */}
+							<main className="flex-1 space-y-12">
+								{/* Featured Article Hero */}
+								{posts.length > 0 && (
+									<section className="space-y-6">
+										<div className="flex items-center justify-between">
+											<h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+												⭐ Featured Story
+											</h2>
+											<div className="hidden lg:flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+												<div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+												<span className="font-medium">LIVE</span>
+											</div>
+										</div>
+										<div className="bg-white dark:bg-neutral-900 rounded-3xl border border-gray-200 dark:border-neutral-700 overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group">
+											<MinimalPosts context="home" posts={posts.slice(0, 1)} />
+										</div>
+									</section>
+								)}
+
+								{/* Latest Stories Grid */}
+								{posts.length > 1 && (
+									<section className="space-y-8">
+										<div className="flex items-center justify-between">
+											<h2 className="text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+												📰 Latest Stories
+											</h2>
+											<div className="flex items-center gap-3">
+												<span className="text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-neutral-800 px-3 py-1 rounded-full">
+													{posts.length - 1} articles
+												</span>
+												<div className="hidden sm:flex items-center text-xs text-gray-400 dark:text-gray-500">
+													<span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+													Updated now
+												</div>
+											</div>
+										</div>
+										<EnhancedPostGrid 
+											posts={posts.slice(1)} 
+											layout="grid"
+											showExcerpt={true}
+											showMetrics={true}
+										/>
+									</section>
+								)}
+							</main>
+
+							{/* Sidebar - Hidden on mobile/tablet, visible on desktop */}
+							<aside className="hidden xl:block xl:w-96 flex-shrink-0">
+								<div className="sticky top-24">
+									<DesktopSidebar posts={posts} />
+								</div>
+							</aside>
 						</div>
 					)}
 
