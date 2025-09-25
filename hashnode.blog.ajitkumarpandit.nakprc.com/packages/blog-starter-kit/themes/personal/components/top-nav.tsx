@@ -230,7 +230,17 @@ export const TopNav = () => {
 						</div>
 
 						{/* Subscribe Button */}
-						<button className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 hidden items-center rounded-lg px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 sm:inline-flex">
+						<a
+							href="#subscribe"
+							className="bg-primary-600 hover:bg-primary-700 focus:ring-primary-500 hidden items-center rounded-lg px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 sm:inline-flex"
+							onClick={(e) => {
+								e.preventDefault();
+								const subscribeSection = document.getElementById('subscribe');
+								if (subscribeSection) {
+									subscribeSection.scrollIntoView({ behavior: 'smooth' });
+								}
+							}}
+						>
 							<svg className="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path
 									strokeLinecap="round"
@@ -240,7 +250,7 @@ export const TopNav = () => {
 								/>
 							</svg>
 							Subscribe
-						</button>
+						</a>
 
 						{/* Mobile menu button */}
 						<button 

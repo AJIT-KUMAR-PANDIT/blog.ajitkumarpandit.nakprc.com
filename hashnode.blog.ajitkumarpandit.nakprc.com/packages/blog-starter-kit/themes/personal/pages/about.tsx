@@ -7,6 +7,7 @@ import { resizeImage } from '@starter-kit/utils/image';
 import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
+import { NewsletterSubscription } from '../components/newsletter-subscription';
 import {
   PublicationByHostDocument,
   PublicationByHostQuery,
@@ -215,28 +216,10 @@ export default function About({ publication }: Props) {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-lg">
-            <div className="text-center space-y-3 sm:space-y-4">
-              <h2 className="text-xl sm:text-2xl font-bold">
-                Stay Updated
-              </h2>
-              <p className="text-sm sm:text-base text-primary-100">
-                Subscribe to get notified about new articles and updates.
-              </p>
-              <div className="max-w-md mx-auto">
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    className="flex-1 px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white/50 text-sm sm:text-base"
-                  />
-                  <button className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-primary-600 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200 text-sm sm:text-base whitespace-nowrap">
-                    Subscribe
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <NewsletterSubscription 
+            publicationId={publication.id}
+            includeAnchor={true}
+          />
 
           {/* Back to Blog */}
           <div className="text-center">

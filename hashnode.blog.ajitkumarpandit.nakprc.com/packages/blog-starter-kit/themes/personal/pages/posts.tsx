@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticProps } from 'next';
@@ -7,6 +7,7 @@ import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { Layout } from '../components/layout';
 import { MinimalPostPreview } from '../components/minimal-post-preview';
+import { NewsletterSubscription } from '../components/newsletter-subscription';
 import { PostCardSkeleton } from '../components/loading-skeletons';
 import { TopNav } from '../components/top-nav';
 import {
@@ -205,28 +206,35 @@ export default function Posts({ publication, posts }: Props) {
           ) : filteredAndSortedPosts.length > 0 ? (
             <div className={viewMode === 'grid' ? 'grid md:grid-cols-2 gap-8' : 'space-y-8'}>
               {filteredAndSortedPosts.map((post, index) => (
-                <div
-                  key={post.id}
-                  className="opacity-0 animate-in slide-in-from-bottom-4 duration-500"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    animationFillMode: 'forwards',
-                  }}
-                >
-                  <MinimalPostPreview
-                    title={post.title}
-                    date={post.publishedAt}
-                    author={{
-                      name: post.author.name,
+                <React.Fragment key={post.id}>
+                  {/* Insert newsletter after the 3rd item */}
+                  {index === 3 && (
+                    <div className={viewMode === 'grid' ? 'md:col-span-2' : ''}>
+                      <NewsletterSubscription publicationId={publication.id} includeAnchor={false} />
+                    </div>
+                  )}
+                  <div
+                    className="opacity-0 animate-in slide-in-from-bottom-4 duration-500"
+                    style={{
+                      animationDelay: `${index * 100}ms`,
+                      animationFillMode: 'forwards',
                     }}
-                    slug={post.slug}
-                    commentCount={post.comments?.totalDocuments}
-                    brief={post.brief}
-                    tags={post.tags?.map((tag) => ({ name: tag.name, slug: tag.slug }))}
-                    readTimeInMinutes={post.readTimeInMinutes}
-                    coverImageUrl={post.coverImage?.url}
-                  />
-                </div>
+                  >
+                    <MinimalPostPreview
+                      title={post.title}
+                      date={post.publishedAt}
+                      author={{
+                        name: post.author.name,
+                      }}
+                      slug={post.slug}
+                      commentCount={post.comments?.totalDocuments}
+                      brief={post.brief}
+                      tags={post.tags?.map((tag) => ({ name: tag.name, slug: tag.slug }))}
+                      readTimeInMinutes={post.readTimeInMinutes}
+                      coverImageUrl={post.coverImage?.url}
+                    />
+                  </div>
+                </React.Fragment>
               ))}
             </div>
           ) : (
