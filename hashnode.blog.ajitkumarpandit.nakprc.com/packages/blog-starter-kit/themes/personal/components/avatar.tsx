@@ -1,4 +1,5 @@
 import { resizeImage } from '@starter-kit/utils/image';
+
 const DEFAULT_AVATAR =
 	'https://cdn.hashnode.com/res/hashnode/image/upload/v1659089761812/fsOct5gl6.png';
 
@@ -17,6 +18,7 @@ export const Avatar = ({ username, name, picture, size }: Props) => {
 					src={resizeImage(picture, { w: 160, h: 160, c: 'face' }, DEFAULT_AVATAR)}
 					className={size ? `w-${size} h-${size} rounded-full` : 'h-8 w-8 rounded-full'}
 					alt={name}
+					loading="lazy"
 				/>
 			</a>
 			<div className="text-base font-bold text-slate-600 dark:text-neutral-300">

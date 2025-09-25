@@ -187,6 +187,9 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      highlight.js:
+        specifier: ^11.11.1
+        version: 11.11.1
       html-react-parser:
         specifier: ^4.2.2
         version: 4.2.5(react@18.2.0)
@@ -2410,6 +2413,10 @@ packages:
   hex-rgb@4.3.0:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
+
+  highlight.js@11.11.1:
+    resolution: {integrity: sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w==}
+    engines: {node: '>=12.0.0'}
 
   html-dom-parser@5.0.1:
     resolution: {integrity: sha512-8MRxHcUjkpfkCEvf3t+r1nO7KCHgfFah23tAskZHgiOFsP5/24uxJnoS6C2Hq+p/cAzpPUiKb8vjywH6ixEgzQ==}
@@ -6740,6 +6747,8 @@ snapshots:
       tslib: 2.5.3
 
   hex-rgb@4.3.0: {}
+
+  highlight.js@11.11.1: {}
 
   html-dom-parser@5.0.1:
     dependencies:
