@@ -35,6 +35,58 @@
     @apply prose break-words text-slate-950 first:prose-p:mt-0 prose-img:max-w-full prose-p:leading-snug prose-a:underline hover:prose-a:bg-primary-50 dark:hover:prose-a:text-primary-500 dark:hover:prose-a:bg-neutral-800 dark:text-neutral-50 prose-blockquote:leading-snug prose-a:leading-snug prose-figure:leading-snug prose-figcaption:leading-snug prose-pre:leading-snug prose-li:leading-snug prose-ul:leading-snug prose-ol:leading-snug prose-th:leading-snug prose-td:leading-snug lg:prose-xl dark:prose-invert dark:prose-pre:bg-neutral-900 first:prose-h1:mt-0 first:prose-h2:mt-0 first:prose-h3:mt-0 first:prose-h4:mt-0 first:prose-h5:mt-0;
   }
   
+  /* Custom code block styling - always dark theme */
+  .custom-code-block {
+    @apply bg-neutral-900 border border-neutral-700 rounded-lg overflow-hidden my-6 shadow-2xl;
+  }
+  
+  .custom-code-block pre {
+    @apply bg-neutral-900 text-neutral-100 p-4 overflow-x-auto m-0;
+    font-family: 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace !important;
+  }
+  
+  .custom-code-block code {
+    @apply bg-transparent text-neutral-100 font-mono;
+    background: transparent !important;
+    color: #f1f5f9 !important;
+  }
+  
+  /* Override prose code styling */
+  .prose pre {
+    @apply bg-neutral-900 border border-neutral-700 rounded-lg;
+    color: #f1f5f9 !important;
+  }
+  
+  .prose code {
+    @apply bg-neutral-800 text-neutral-100 px-2 py-1 rounded border border-neutral-700;
+    color: #f1f5f9 !important;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0 rounded-none border-none;
+    background: transparent !important;
+    color: #f1f5f9 !important;
+  }
+  
+  /* Scrollbar styling for code blocks */
+  .scrollbar-thin::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  
+  .scrollbar-thumb-neutral-600::-webkit-scrollbar-thumb {
+    background-color: #525252;
+    border-radius: 3px;
+  }
+  
+  .scrollbar-track-neutral-800::-webkit-scrollbar-track {
+    background-color: #262626;
+  }
+  
+  .scrollbar-thumb-neutral-600::-webkit-scrollbar-thumb:hover {
+    background-color: #404040;
+  }
+  
   /* Overflow handling for content elements */
   .content-overflow-fix {
     @apply overflow-hidden;

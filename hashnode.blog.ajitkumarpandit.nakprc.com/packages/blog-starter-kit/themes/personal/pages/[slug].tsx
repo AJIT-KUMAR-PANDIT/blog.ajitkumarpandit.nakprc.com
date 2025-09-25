@@ -12,7 +12,7 @@ import { AppProvider } from '../components/contexts/appContext';
 import { CoverImage } from '../components/cover-image';
 import { DateFormatter } from '../components/date-formatter';
 import { Layout } from '../components/layout';
-import { MarkdownToHtml } from '../components/markdown-to-html';
+import { EnhancedMarkdown } from '../components/enhanced-markdown';
 import { PersonalHeader } from '../components/personal-theme-header';
 import {
 	PageByPublicationDocument,
@@ -140,8 +140,8 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 				</div>
 			)}
 			{/* Article Content */}
-			<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-pre:bg-gray-100 dark:prose-pre:bg-neutral-800 prose-pre:overflow-x-auto prose-pre:max-w-full prose-code:break-words prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-video:max-w-full prose-iframe:max-w-full content-overflow-fix">
-				<MarkdownToHtml contentMarkdown={post.content.markdown} />
+			<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-video:max-w-full prose-iframe:max-w-full content-overflow-fix">
+				<EnhancedMarkdown contentMarkdown={post.content.markdown} />
 			</div>
 			{/* Tags Section */}
 			{(post.tags ?? []).length > 0 && (
@@ -167,7 +167,7 @@ const Page = (page: StaticPageFragment) => {
 			<Head>
 				<title>{title}</title>
 			</Head>
-			<MarkdownToHtml contentMarkdown={page.content.markdown} />
+			<EnhancedMarkdown contentMarkdown={page.content.markdown} />
 		</>
 	);
 };
