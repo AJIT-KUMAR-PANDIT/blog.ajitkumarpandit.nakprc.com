@@ -35,6 +35,121 @@
     @apply prose break-words text-slate-950 first:prose-p:mt-0 prose-img:max-w-full prose-p:leading-snug prose-a:underline hover:prose-a:bg-primary-50 dark:hover:prose-a:text-primary-500 dark:hover:prose-a:bg-neutral-800 dark:text-neutral-50 prose-blockquote:leading-snug prose-a:leading-snug prose-figure:leading-snug prose-figcaption:leading-snug prose-pre:leading-snug prose-li:leading-snug prose-ul:leading-snug prose-ol:leading-snug prose-th:leading-snug prose-td:leading-snug lg:prose-xl dark:prose-invert dark:prose-pre:bg-neutral-900 first:prose-h1:mt-0 first:prose-h2:mt-0 first:prose-h3:mt-0 first:prose-h4:mt-0 first:prose-h5:mt-0;
   }
   
+  /* Table of Contents Styles */
+  .table-of-contents {
+    /* TOC-specific scrollbar styling */
+  }
+  
+  /* TOC text wrapping and display */
+  .table-of-contents button {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+  
+  .table-of-contents button span {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.4;
+  }
+  
+  .table-of-contents .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+  
+  .table-of-contents .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .table-of-contents .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .table-of-contents .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 3px;
+  }
+  
+  .table-of-contents .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.7);
+  }
+  
+  .dark .table-of-contents .scrollbar-thin {
+    scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+  }
+  
+  .dark .table-of-contents .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+  }
+  
+  .dark .table-of-contents .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(75, 85, 99, 0.7);
+  }
+  
+  /* TOC heading scroll margin */
+  .hashnode-content-style h2,
+  .hashnode-content-style h3,
+  .hashnode-content-style h4,
+  .hashnode-content-style h5,
+  .hashnode-content-style h6 {
+    scroll-margin-top: 100px;
+    scroll-padding-top: 20px;
+  }
+  
+  /* Additional scroll behavior for headings */
+  .hashnode-content-style h2[id],
+  .hashnode-content-style h3[id],
+  .hashnode-content-style h4[id],
+  .hashnode-content-style h5[id],
+  .hashnode-content-style h6[id] {
+    position: relative;
+  }
+  
+  .hashnode-content-style h2[id]:target,
+  .hashnode-content-style h3[id]:target,
+  .hashnode-content-style h4[id]:target,
+  .hashnode-content-style h5[id]:target,
+  .hashnode-content-style h6[id]:target {
+    animation: highlight-heading 2s ease-in-out;
+  }
+  
+  @keyframes highlight-heading {
+    0% {
+      background-color: rgba(59, 130, 246, 0.1);
+    }
+    50% {
+      background-color: rgba(59, 130, 246, 0.2);
+    }
+    100% {
+      background-color: transparent;
+    }
+  }
+  
+  /* TOC button animations */
+  .table-of-contents button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .table-of-contents button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .table-of-contents button:hover::before {
+    left: 100%;
+  }
+  
   /* Custom code block styling - always dark theme */
   .custom-code-block {
     @apply bg-neutral-900 border border-neutral-700 rounded-lg overflow-hidden my-6 shadow-2xl;
@@ -513,5 +628,32 @@
   
   .mobile-btn-secondary {
     @apply mobile-btn bg-gray-100 dark:bg-neutral-800 text-gray-900 dark:text-white shadow-md;
+  }
+  
+  /* Table of Contents Mobile Optimizations */
+  @media (max-width: 1280px) {
+    .table-of-contents button {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .table-of-contents .mobile-toc {
+      transform: translateZ(0);
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+  
+  /* Desktop TOC hover effects */
+  @media (min-width: 1280px) {
+    .table-of-contents .desktop-toc {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .table-of-contents .desktop-toc:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
   }
 }

@@ -13,6 +13,7 @@ import { CoverImage } from '../components/cover-image';
 import { DateFormatter } from '../components/date-formatter';
 import { Layout } from '../components/layout';
 import { EnhancedMarkdown } from '../components/enhanced-markdown';
+import { TableOfContents } from '../components/table-of-contents';
 import {
 	PageByPublicationDocument,
 	PageByPublicationQuery,
@@ -245,9 +246,20 @@ const Post = (publication: PublicationFragment, post: PostFullFragment) => {
 					</div>
 				</div>
 			)}
-			{/* Article Content */}
-			<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-video:max-w-full prose-iframe:max-w-full content-overflow-fix">
-				<EnhancedMarkdown contentMarkdown={post.content.markdown} />
+			{/* Table of Contents - Mobile */}
+			<TableOfContents showOnMobile={true} />
+			
+			{/* Article Content with Desktop TOC */}
+			<div className="relative">
+				{/* Desktop Table of Contents - Positioned absolutely */}
+				<div className="hidden xl:block absolute -right-96 top-0 w-80">
+					<TableOfContents showOnMobile={false} />
+				</div>
+				
+				{/* Main Content */}
+				<div className="prose prose-sm sm:prose-base lg:prose-lg xl:prose-xl prose-gray dark:prose-invert max-w-none prose-headings:text-black dark:prose-headings:text-white prose-p:leading-relaxed prose-table:overflow-x-auto prose-img:max-w-full prose-img:h-auto prose-video:max-w-full prose-iframe:max-w-full content-overflow-fix">
+					<EnhancedMarkdown contentMarkdown={post.content.markdown} />
+				</div>
 			</div>
 			{/* Tags Section */}
 			{(post.tags ?? []).length > 0 && (
@@ -286,8 +298,8 @@ export default function PostOrPage({ publication, post, page }: Props) {
 	return (
 		<AppProvider publication={publication} post={post}>
 			<Layout>
-			<Container className="mx-auto flex w-full max-w-4xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 overflow-hidden">
-				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10 w-full overflow-hidden">
+			<Container className="mx-auto flex w-full max-w-4xl xl:max-w-7xl flex-col items-stretch gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 xl:px-12 overflow-hidden relative">
+				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10 w-full overflow-hidden xl:mr-96">
 					{post ? Post(publication, post) : Page(page)}
 				</article>
 			</Container>

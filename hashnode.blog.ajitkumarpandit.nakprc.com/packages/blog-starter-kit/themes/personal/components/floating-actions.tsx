@@ -84,9 +84,9 @@ export const FloatingActions = () => {
     <>
       {/* Main FAB */}
       <div className="fixed bottom-6 right-6 z-50">
-        <div className="flex flex-col items-end gap-3">
+        <div className="flex flex-col items-end gap-3 lg:gap-6">
           {/* Action buttons - show when main FAB is active */}
-          <div className={`flex flex-col items-end gap-3 transition-all duration-300 ${showActions ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
+          <div className={`flex flex-col items-end gap-3 lg:gap-4 transition-all duration-300 ${showActions ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
