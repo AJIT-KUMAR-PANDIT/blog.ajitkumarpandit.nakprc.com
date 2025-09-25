@@ -11,7 +11,6 @@ import { Container } from '../components/container';
 import { AppProvider } from '../components/contexts/appContext';
 import { CoverImage } from '../components/cover-image';
 import { DateFormatter } from '../components/date-formatter';
-import { Footer } from '../components/footer';
 import { Layout } from '../components/layout';
 import { MarkdownToHtml } from '../components/markdown-to-html';
 import { PersonalHeader } from '../components/personal-theme-header';
@@ -186,7 +185,6 @@ export default function PostOrPage({ publication, post, page }: Props) {
 				<article className="flex flex-col items-start gap-6 sm:gap-8 lg:gap-10 pb-8 lg:pb-10 w-full overflow-hidden">
 					{post ? Post(publication, post) : Page(page)}
 				</article>
-				<Footer />
 			</Container>
 			</Layout>
 		</AppProvider>

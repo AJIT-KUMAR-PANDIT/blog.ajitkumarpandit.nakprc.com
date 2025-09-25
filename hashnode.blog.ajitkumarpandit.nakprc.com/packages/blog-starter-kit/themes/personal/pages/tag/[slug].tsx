@@ -5,7 +5,6 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { Container } from '../../components/container';
 import { AppProvider } from '../../components/contexts/appContext';
-import { Footer } from '../../components/footer';
 import { Layout } from '../../components/layout';
 import { MinimalPosts } from '../../components/minimal-posts';
 import { PersonalHeader } from '../../components/personal-theme-header';
@@ -51,7 +50,6 @@ export default function Tag({ publication, posts, tag }: Props) {
 						<h1 className="text-4xl font-bold text-slate-900 dark:text-neutral-50">#{tag}</h1>
 					</div>
 					{posts.length > 0 && <MinimalPosts context="home" posts={posts} />}
-					<Footer />
 				</Container>
 			</Layout>
 		</AppProvider>
